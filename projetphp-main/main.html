@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/main.css">
+  <link href="css/main.css" rel="stylesheet/scss" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <title>Title</title>
+</head>
+<body>
+  <div class='dashboard'>
+    <div class="dashboard-nav">
+      <header><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a><a href="#" class="brand-logo">
+        <img src="images/img_2.png" class="iconimg"> <span>MENU</span></a></header>
+      <nav class="dashboard-nav-list"><a href="#" class="dashboard-nav-item"><img src="images/img_3.png" class="iconimg">
+        Home </a><a
+              href="#" class="dashboard-nav-item active"><img src="images/img_4.png" class="iconimg"> dashboard
+      </a>
+        <div class='dashboard-nav-dropdown'><a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><img src="images/img_5.png" class="iconimg"> Users </a>
+          <div class='dashboard-nav-dropdown-menu'><a href="#"
+                                                      class="dashboard-nav-dropdown-item">All</a><a
+                  href="#" class="dashboard-nav-dropdown-item">Subscribed</a><a
+                  href="#"
+                  class="dashboard-nav-dropdown-item">Non-subscribed</a><a
+                  href="#" class="dashboard-nav-dropdown-item">Banned</a><a
+                  href="#" class="dashboard-nav-dropdown-item">New</a></div>
+        </div>
+        <a href="#" class="dashboard-nav-item"><img src="images/img_7.png" class="iconimg"> Settings </a><a
+                href="#" class="dashboard-nav-item"><img src="images/img_6.png" class="iconimg"> Profile </a>
+        <div class="nav-item-divider"></div>
+        <a
+                href="#" class="dashboard-nav-item"><img src="images/img_8.png" class="iconimg"> Logout </a>
+      </nav>
+    </div>
+    <div class='dashboard-app'>
+      <header class='dashboard-toolbar'><a href="#!" class="menu-toggle"><img src="images/img_1.png" class="iconimg"></a></header>
+      <div class='dashboard-content'>
+        <div class='container'>
+          <div class='card'>
+            <div class='card-header'>
+              <h1>Users Table </h1>
+            </div>
+            <div class='card-body'>
+
+              <div class="Tablecontainer">
+
+                <div class="table">
+                  <div class="table-header">
+                    <div class="header__item"><a id="name" class="filter__link" href="#">Name</a></div>
+                    <div class="header__item"><a id="wins" class="filter__link filter__link--number" href="#">Wins</a></div>
+                    <div class="header__item"><a id="draws" class="filter__link filter__link--number" href="#">Draws</a></div>
+                    <div class="header__item"><a id="losses" class="filter__link filter__link--number" href="#">Losses</a></div>
+                    <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#">Total</a></div>
+                  </div>
+                  <div class="table-content">
+                    <div class="table-row">
+                      <div class="table-data">Tom</div>
+                      <div class="table-data">2</div>
+                      <div class="table-data">0</div>
+                      <div class="table-data">1</div>
+                      <div class="table-data">5</div>
+                    </div>
+                    <div class="table-row">
+                      <div class="table-data">Dick</div>
+                      <div class="table-data">1</div>
+                      <div class="table-data">1</div>
+                      <div class="table-data">2</div>
+                      <div class="table-data">3</div>
+                    </div>
+                    <div class="table-row">
+                      <div class="table-data">Dick</div>
+                      <div class="table-data">1</div>
+                      <div class="table-data">1</div>
+                      <div class="table-data">2</div>
+                      <div class="table-data">3</div>
+                    </div>
+                    <div class="table-row">
+                      <div class="table-data">Dick</div>
+                      <div class="table-data">1</div>
+                      <div class="table-data">1</div>
+                      <div class="table-data">2</div>
+                      <div class="table-data">3</div>
+                    </div>
+                    <div class="table-row">
+                      <div class="table-data">Dick</div>
+                      <div class="table-data">1</div>
+                      <div class="table-data">1</div>
+                      <div class="table-data">2</div>
+                      <div class="table-data">3</div>
+                    </div>
+                    <div class="table-row">
+                      <div class="table-data">Harry</div>
+                      <div class="table-data">0</div>
+                      <div class="table-data">2</div>
+                      <div class="table-data">2</div>
+                      <div class="table-data">2</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+   const mobileScreen = window.matchMedia("(max-width: 990px )");
+   $(document).ready(function () {
+     $(".dashboard-nav-dropdown-toggle").click(function () {
+       $(this).closest(".dashboard-nav-dropdown")
+               .toggleClass("show")
+               .find(".dashboard-nav-dropdown")
+               .removeClass("show");
+       $(this).parent()
+               .siblings()
+               .removeClass("show");
+     });
+     $(".menu-toggle").click(function () {
+       if (mobileScreen.matches) {
+         $(".dashboard-nav").toggleClass("mobile-show");
+       } else {
+         $(".dashboard").toggleClass("dashboard-compact");
+       }
+     });
+   });
+ </script>
+</body>
+</html>

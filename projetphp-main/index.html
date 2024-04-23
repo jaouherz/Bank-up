@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>24x7 Services Sky Bank</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon-32x32.png" rel="icon">
+    <link href="assets/img/apple-icon-180x180.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        @keyframes slide-in {
+            0% {
+                top: -300px;
+            }
+            100% {
+                top: 0;
+            }
+        }
+        @keyframes scaleDown {
+            0% {
+                transform: scale(1);
+            }
+            10% {
+                transform: scale(0.7);
+            }
+            95% {
+                transform: scale(0.7);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        @keyframes reveal-info {
+            0% {
+                height: 0;
+            }
+            5% {
+                height: 350px;
+            }
+            95% {
+                height: 350px;
+            }
+            100% {
+                height: 0;
+            }
+        }
+      
+        .container2 {
+            margin-top: 50px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 1200px;
+            height: 700px;
+            /*background-color: #d7ccc8;*/
+            font-size: 14px;
+            font-family: "Montserrat", sans;
+        }
+        .container2 .container-inner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            position: relative;
+            animation: fade-in 1.5s ease, slide-in 1.2s ease;
+            -webkit-animation: fade-in 1.5s ease, slide-in 1.2s ease;
+        }
+        .container2 .container-inner .main-content {
+            flex-basis: 50%;
+            order: 1;
+            align-self: center;
+            display: flex;
+            flex-direction: column;
+        }
+        .container2 .container-inner .main-content .main-headings {
+            width: 100%;
+            align-self: center;
+            display: flex;
+            flex-direction: column;
+            animation: scaleDown 6s ease 2s;
+            -webkit-animation: scaleDown 6s ease 2s;
+        }
+        .container2 .container-inner .main-content .main-headings #by-line {
+            width: 60%;
+            padding-bottom: 1px;
+            padding-left: 3px;
+            margin-left: 15px;
+            font-size: 85%;
+            border-bottom: 1px solid #757575;
+            font-style: italic;
+        }
+        .container2 .container-inner .main-content .main-headings .heading {
+            margin-top: 20px;
+            margin-left: 80px;
+        }
+        .container2 .container-inner .main-content .main-headings .heading #heading1, .container2 .container-inner .main-content .main-headings .heading #heading2, .container .container-inner .main-content .main-headings .heading #heading3 {
+            margin: 0;
+            margin-top: -20px;
+        }
+        .container2 .container-inner .main-content .main-headings .heading #heading1, .container2 .container-inner .main-content .main-headings .heading #heading2 {
+            font-size: 500%;
+            font-weight: normal;
+            letter-spacing: -2px;
+        }
+        .container2 .container-inner .main-content .main-headings .heading #heading1 {
+            margin-left: 50px;
+        }
+        .container2 .container-inner .main-content .main-headings .heading #heading2 {
+            margin-left: 150px;
+        }
+        .container2 .container-inner .main-content .main-headings .heading #heading3 {
+            margin-top: -52px;
+            font-size: 1100%;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+        .container2 .container-inner .main-content .main-headings .short-bio {
+            width: 60%;
+            margin-top: -30px;
+            margin-left: 90px;
+            font-style: italic;
+            font-size: 105%;
+        }
+        .container2 .container-inner .main-content .main-headings a {
+            margin-left: 92px;
+            align-self: flex-start;
+            font-weight: bold;
+            font-size: 120%;
+            font-family: helvetica;
+            text-decoration: none;
+            color: black;
+        }
+        .container2 .container-inner .main-content .main-headings a:hover {
+            text-decoration: underline;
+        }
+        .container2 .container-inner .main-content .more-info {
+            margin-top: -70px;
+            width: 50%;
+            height: 0;
+            margin-left: auto;
+            margin-right: auto;
+            align-self: flex-start;
+            overflow: hidden;
+            animation: reveal-info 4s ease 3s;
+            -webkit-animation: reveal-info 4s ease 3s;
+        }
+        .container2 .container-inner .image-wrapper {
+            flex-basis: 50%;
+            order: 2;
+        }
+        .container2 .container-inner .image-wrapper .image-container {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            animation: scaleDown 6s ease 2s;
+            -webkit-animation: scaleDown 6s ease 2s;
+        }
+        .container2 .container-inner .image-wrapper .image-container img {
+            width: 100%;
+            height: 613px;
+            position: relative;
+        }
+        @media (min-width: 350px) and (max-width: 529px) {
+            * {
+                animation-name: none !important;
+            }
+            .container2 {
+                width: 90%;
+                height: 700px;
+                margin-left: auto;
+                margin-right: auto;
+                font-size: 5px;
+                margin-bottom: 20px;
+            }
+            .container-inner {
+                flex-direction: column !important;
+                justify-content: center !important;
+            }
+            .main-content, .image-wrapper {
+                flex-basis: 100% !important;
+            }
+            .main-content {
+                order: 2 !important;
+                outline: 1px solid red;
+                margin: 0 50px;
+            }
+            .image-wrapper {
+                order: 1 !important;
+            }
+            .heading {
+                margin-left: 55px !important;
+            }
+            #heading1, #heading2 {
+                margin: 0;
+                margin-top: -5px !important;
+            }
+            #heading2 {
+                margin-left: 100px !important;
+            }
+            #heading3 {
+                margin-top: -20px !important;
+            }
+            .short-bio {
+                margin-top: -10px !important;
+                margin-left: 60px !important;
+            }
+            .more-info {
+                height: 150px !important;
+                width: 60% !important;
+                margin: 0 !important;
+                align-self: flex-start !important;
+                margin-top: 0px !important;
+                margin-left: 60px !important;
+                font-size: 8px;
+            }
+            .link {
+                display: none;
+            }
+            .image-wrapper {
+                order: 1 !important;
+                width: 100%;
+                height: 100px !important;
+                justify-content: center !important;
+            }
+            .image-container {
+                width: 100% !important;
+                height: 400px;
+                margin-left: auto;
+                margin-right: auto;
+                position: relative;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            img {
+                width: 100% !important;
+                height: auto !important;
+                top: -20px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+        @media (min-width: 530px) and (max-width: 699px) {
+            * {
+                animation-name: none !important;
+            }
+            .container2 {
+                width: 90%;
+                height: 900px;
+                margin-left: auto;
+                margin-right: auto;
+                font-size: 8px;
+            }
+            .container-inner {
+                flex-direction: column !important;
+                justify-content: center !important;
+            }
+            .main-content, .image-wrapper {
+                flex-basis: 100% !important;
+            }
+            .main-content {
+                width: 80%;
+                order: 2 !important;
+                align-self: center !important;
+            }
+            .main-headings {
+                width: 100%;
+                margin-top: 20px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .heading {
+                margin-left: 55px !important;
+            }
+            #heading1, #heading2 {
+                margin: 0;
+                margin-top: -15px !important;
+            }
+            #heading3 {
+                margin-top: -30px !important;
+            }
+            .short-bio {
+                margin-top: -20px !important;
+                margin-left: 60px !important;
+            }
+            .link {
+                display: none;
+            }
+            .more-info {
+                height: 150px !important;
+                width: 60% !important;
+                margin: 0 !important;
+                align-self: flex-start !important;
+                margin-top: 0px !important;
+                margin-left: 60px !important;
+                text-align: justify;
+            }
+            .image-wrapper {
+                order: 1 !important;
+                width: 100%;
+                height: 400px;
+                justify-content: center !important;
+            }
+            .image-container2 {
+                width: 100% !important;
+                height: 400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            img {
+                width: 100% !important;
+                height: auto !important;
+                top: -20px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+        @include tablet {
+             .container2 {
+                 width: 100%;
+                 height: auto;
+                 font-size: 7px;
+            }
+             #heading3 {
+                 margin-top: -35px !important;
+            }
+             .link {
+                 margin-left: 30px;
+            }
+             .more-info {
+                 margin-top: -40px !important;
+            }
+        }
+
+        @media (min-width: 700px) and (max-width: 1200px) {
+            .container2 {
+                width: 100%;
+                height: auto;
+                font-size: 9px;
+            }
+            #heading3 {
+                margin-top: -35px !important;
+            }
+            .link {
+                margin-left: 30px;
+            }
+            .more-info {
+                margin-top: -40px !important;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top header-inner-pages" style="position:absolute;">
+    <div class="container d-flex align-items-center justify-content-between">
+        <h1 class="logo"><a href="../SkyBank/">Bank-up</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link scrollto " style="cursor: pointer">Home</a></li>
+                <li><a class="nav-link scrollto" href="about.php">About</a></li>
+                <li><a class="nav-link scrollto " href="terms.html">Terms and Condition</a></li>
+                <li><a class="nav-link scrollto" href="contact.html">Contact</a></li>
+                <li><a class="nav-link scrollto" href="signup.php">Sign Up</a></li>
+
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
+    </div>
+</header><!-- End Header -->
+
+<main id="main">
+
+
+    <section class="inner-page" style="    background: #f7f7f7;">
+        <div class="container2">
+            <div class="container-inner">
+                <div class="main-content">
+                    <div class="main-headings" id="main-headings-js">
+                        <p id="by-line">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+                        <div class="heading">
+                            <h3 id="heading1">Decouvrez</h3>
+                            <h3 id="heading2">Notre @</h3>
+                            <h1 id="heading3">Bank</h1>
+                        </div>
+
+                        <div class="short-bio">
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempore, repellat, quod sed optio nesciunt aspernatur inventore ab, nostrum accusantium harum dolor voluptate nulla!</p>
+
+                        </div>
+
+                        <a href="#" class="link" onclick="readMore()">Read More</a>
+                    </div>
+
+                    <div class="more-info " id="more-info-js">
+
+                        <h4>Lorem ipsum dolor sit.</h4>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse expedita impedit iste, quibusdam debitis fugit repudiandae voluptatum vero quod nulla!</p>
+
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita delectus iusto facere dignissimos quaerat facilis voluptatibus fuga quod impedit. Atque tenetur amet officia repudiandae odit.</p>
+                    </div>
+
+                </div>
+
+                <div class="image-wrapper">
+                    <div class="image-container">
+                        <img class="image" src="images/img_13.png" alt="image of ONLINE Banking.">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-6 footer-contact">
+                    <h3>Sky Bank</h3>
+                    <p>
+                        Sky Tower <br>
+                        New Mumbai, NY 535022<br>
+                        India <br><br>
+                        <strong>Phone:</strong> +91 5589 55488 55<br>
+                        <strong>Email:</strong> info@example.com<br>
+                    </p>
+                </div>
+
+                <div class="col-lg-2 col-md-6 footer-links">
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="index.php">Home</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="about.php">About us</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="../SkyBank/#services">Services</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="terms.html">Terms of service</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="privacypolicy.html">Privacy policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="user/UserData/Transfer.php">Money Transfer</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="Online Banking.html">Online Banking</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="user/UserData/Dashboard.php">Check Balance</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="user/CreateAccount.php">Create Account</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="user/login.php">Login</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6 footer-newsletter">
+                    <div class="d-flex justify-content-center">
+                        <img src="assets/img/Logo.svg" style="width: 100px; height: 100px;" alt="">
+                    </div>
+
+                    <h1 class="text-center mt-2">SKY BANK</h1>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="copyright-wrap d-md-flex py-4">
+            <div class="me-md-auto text-center text-md-start">
+                <div class="copyright">
+                    &copy; Copyright <strong><span>Sky Bank</span></strong>. All Rights Reserved
+                </div>
+                <div class="credits">
+                </div>
+            </div>
+            <div class="social-links text-center text-md-right pt-3 pt-md-0">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+        </div>
+
+    </div>
+</footer>
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+<div id="preloader"></div>
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+<script src="assets/vendor/purecounter/purecounter.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+<script>
+    function readMore() {
+        var expandInfo = document.getElementById("more-info-js");
+        var mainHeadings = document.getElementById("main-headings-js");
+
+        mainHeadings.style.transform = "scale(0.7)";
+        expandInfo.style.height = "350px";
+    }
+</script>
+</body>
+
+</html>
