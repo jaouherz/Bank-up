@@ -115,7 +115,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
                 <input type="date" half placeholder="date naissance" autocomplete="no">
                 <input type="text" half placeholder="adress" autocomplete="no">
                 <input type="text" placeholder="e-Mail" autocomplete="no">
+<select name="role">
+    <option>hi</option>
 
+</select>
                 <input type="submit" value="Send it">
             </form>
 
