@@ -3,19 +3,44 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
     $name = $_POST['name'];
-    $id_role = 1;
-
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $numtel = $_POST['numtel'];
+    $date_naissance = $_POST['date_naissance'];
+    $adress = $_POST['adress'];
+    $id_role = $_POST['role'];; // Assuming the role value is passed as a POST parameter
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     $db = new PDO('mysql:host=localhost;dbname=test', 'root', '');
 
-    $stmt = $db->prepare("INSERT INTO user (Firstname, id_role) VALUES (:name, :id_role)");
+    $stmt = $db->prepare("INSERT INTO user (Firstname, Email, password, Numtel, Date_N, Adresse, id_role) VALUES (:name, :email, :password, :numtel, :date_naissance, :adress, :id_role)");
     $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':password', $hashed_password);
+    $stmt->bindParam(':numtel', $numtel);
+    $stmt->bindParam(':date_naissance', $date_naissance);
+    $stmt->bindParam(':adress', $adress);
     $stmt->bindParam(':id_role', $id_role);
 
     $stmt->execute();
-
-
+    if ($stmt) {
+        echo '<div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p>Form submitted successfully!</p>
+                </div>
+            </div>';
+    } else {
+        echo '<div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p>Form submission failed!</p>
+                </div>
+            </div>';
+    }
 }
 ?>
+
+
 
 <html lang="en">
 <head>
@@ -102,7 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
         </div>
     </section><!-- End Breadcrumbs -->
 
-    <section class="inner-page" style="margin-left: 28% ">
+    <section >
         <div class="container">
 
 
@@ -110,17 +135,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
                 <div id="focus"></div>
                 <h1>Your info</h1>
                 <input type="text" half placeholder="First name" name="name" autocomplete="no">
-                <input type="text" half placeholder="Last name" autocomplete="no">
-                <input type="text" placeholder="Numtel" autocomplete="no">
-                <input type="date" half placeholder="date naissance" autocomplete="no">
-                <input type="text" half placeholder="adress" autocomplete="no">
-                <input type="text" placeholder="e-Mail" autocomplete="no">
-<select name="role">
-    <option>hi</option>
-
-</select>
+                <input type="text" half placeholder="Last name" name="lastname" autocomplete="no">
+                <input type="text" placeholder="Numtel" name="numtel" autocomplete="no">
+                <input type="date" half placeholder="date naissance" name="date_naissance" autocomplete="no">
+                <input type="text" half placeholder="adress" name="adress" autocomplete="no">
+                <input type="email" placeholder="e-Mail" name="email" autocomplete="no">
+                <input type="password" placeholder="Password" name="password" autocomplete="no">
                 <input type="submit" value="Send it">
+                <select name="role">
+                    <?php
+                    $stmt = $db->query("SELECT * FROM role");
+                    $roles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($roles as $role) {
+                        echo '<option value="' . $role['id_role'] . '">' . $role['nom_role'] . '</option>';
+                    }
+                    ?>
+                </select>
+
             </form>
+
 
         </div>
     </section>
@@ -216,7 +249,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
 
 <!-- Template Main JS File -->
 <script src="assets/js/main.js"></script>
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
 
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Display the modal
+    modal.style.display = "block";
+</script>
 </body>
 
 </html>
