@@ -1,5 +1,37 @@
 
 <!DOCTYPE html>
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $message = $_POST['message'];
+    $db = new PDO('mysql:host=localhost;dbname=test', 'root', '');
+
+    $stmt = $db->prepare("INSERT INTO contact_us (name, email, message) VALUES (:name, :email, :message)");
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':message', $message);
+
+    $stmt->execute();
+    if ($stmt) {
+        echo '<div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p>Form submitted successfully!</p>
+                </div>
+            </div>';
+    } else {
+        echo '<div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p>Form submission failed!</p>
+                </div>
+            </div>';
+    }
+}
+?>
+
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -223,7 +255,7 @@
       <div class="container2">
         <h1>Contact Us</h1>
         <div class="contact-form">
-          <form action="#" method="post">
+          <form autocomplete="off" method="post">
             <div class="form-group">
               <label for="name">Name:</label>
               <input type="text" id="name" name="name" required>
