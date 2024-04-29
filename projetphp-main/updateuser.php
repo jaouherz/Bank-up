@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
+    <title>Update User</title>
 
 </head>
 <body>
@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>24x7 Services Sky Bank</title>
+    <title></title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -78,13 +78,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
     <link href="../signup.css" rel="stylesheet">
 
 </head>
+<style>
+    #header.header-inner-pages {
+        background: rgba(0, 125, 254, 255);
+        padding: 12px 0;
+    }
 
+</style>
 <body>
 
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top header-inner-pages">
     <div class="container d-flex align-items-center justify-content-between">
-        <h1 class="logo"><a href="../SkyBank/">Sky Bank</a></h1>
+        <h1 class="logo"><a href="../SkyBank/">Bank-Up</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -112,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
             <div class="d-flex justify-content-between align-items-center">
                 <ol>
                     <li><a href="index.html">Home</a></li>
-                    <li>Contact us</li>
+                    <li>Update</li>
                 </ol>
             </div>
 
@@ -128,9 +134,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
                 <h1>Your info</h1>
                 <input type="text" half placeholder="First name" name="name" value="<?php echo isset($name) ? $name : ''; ?>" autocomplete="no">
                 <input type="text" half placeholder="Last name" name="lastname" value="<?php echo isset($lastname) ? $lastname : ''; ?>" autocomplete="no">
-                <input type="text" placeholder="Numtel" name="numtel" value="<?php echo isset($numtel) ? $numtel : ''; ?>" autocomplete="no">
-                <input type="date" half placeholder="date naissance" name="date_naissance" value="<?php echo isset($date_naissance) ? $date_naissance : ''; ?>" autocomplete="no">
-                <input type="text" half placeholder="adress" name="adress" value="<?php echo isset($adress) ? $adress : ''; ?>" autocomplete="no">
+                <input type="text" placeholder="Number" name="numtel" value="<?php echo isset($numtel) ? $numtel : ''; ?>" autocomplete="no">
+                <input type="date" half placeholder="Date of birth" name="date_naissance" value="<?php echo isset($date_naissance) ? $date_naissance : ''; ?>" autocomplete="no">
+                <input type="text" half placeholder="address" name="adress" value="<?php echo isset($adress) ? $adress : ''; ?>" autocomplete="no">
                 <input type="email" placeholder="e-Mail" name="email" value="<?php echo isset($email) ? $email : ''; ?>" autocomplete="no">
                 <input type="password" placeholder="Password" name="password" autocomplete="no">
                 <input type="submit" value="Send it">
@@ -152,79 +158,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
 
 </main><!-- End #main -->
 
-<!-- ======= Footer ======= -->
-<footer id="footer">
 
-    <div class="footer-top">
-        <div class="container2">
-            <div class="row">
-
-                <div class="col-lg-3 col-md-6 footer-contact">
-                    <h3>Sky Bank</h3>
-                    <p>
-                        Sky Tower <br>
-                        New Mumbai, NY 535022<br>
-                        India <br><br>
-                        <strong>Phone:</strong> +91 5589 55488 55<br>
-                        <strong>Email:</strong> info@example.com<br>
-                    </p>
-                </div>
-
-                <div class="col-lg-2 col-md-6 footer-links">
-                    <h4>Useful Links</h4>
-                    <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="index.php">Home</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="about.php">About us</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="../SkyBank/#services">Services</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="terms.html">Terms of service</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="privacypolicy.html">Privacy policy</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Our Services</h4>
-                    <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="user/UserData/Transfer.php">Money Transfer</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="Online Banking.html">Online Banking</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="user/UserData/Dashboard.php">Check Balance</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="user/CreateAccount.php">Create Account</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="user/login.php">Login</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-4 col-md-6 footer-newsletter">
-                    <div class="d-flex justify-content-center">
-                        <img src="assets/img/Logo.svg" style="width: 100px; height: 100px;" alt="">
-                    </div>
-
-                    <h1 class="text-center mt-2">SKY BANK</h1>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-
-        <div class="copyright-wrap d-md-flex py-4">
-            <div class="me-md-auto text-center text-md-start">
-                <div class="copyright">
-                    &copy; Copyright <strong><span>Sky Bank</span></strong>. All Rights Reserved
-                </div>
-                <div class="credits">
-                </div>
-            </div>
-            <div class="social-links text-center text-md-right pt-3 pt-md-0">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-            </div>
-        </div>
-
-    </div>
-</footer>
 
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i></a>

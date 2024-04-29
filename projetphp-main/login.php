@@ -99,7 +99,9 @@ if (isset($_POST['submit'])) {
         background: rgba(0, 125, 254, 255);
         padding: 12px 0;
     }
-
+section {
+    margin-top:70px;
+}
 </style>
 <body>
 
