@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
+    <title>Sign Up</title>
 
 </head>
 <body>
@@ -86,7 +86,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
     <link href="../signup.css" rel="stylesheet">
 
 </head>
-
+<style>
+    #header.header-inner-pages {
+        background: rgba(0, 125, 254, 255);
+        padding: 12px 0;
+    }
+    </style>
 <body>
 
 <!-- ======= Header ======= -->
@@ -102,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
                 <li><a class="nav-link scrollto" href="about.php">About</a></li>
                 <li><a class="nav-link scrollto " href="terms.html">Terms and Condition</a></li>
                 <li><a class="nav-link scrollto" href="contact.html">Contact</a></li>
-                <li><a class="nav-link scrollto" style="cursor: pointer">Sign Up</a></li>
+                <li><a class="nav-link scrollto" style="cursor: pointer" href="login.php">Login</a></li>
 
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>

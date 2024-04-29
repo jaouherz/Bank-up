@@ -58,7 +58,6 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <table class="table table-hover">
             <thead >
             <tr style="background: #0a53be">
-
                 <th>First Name</th>
                 <th>Email</th>
                 <th>Role</th>
