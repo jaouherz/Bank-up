@@ -37,7 +37,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Title</title>
 </head>
-
+<style>
+    .table{
+        width:1000px;
+        margin-left:70px;
+    }
+    .dashboard-nav {
+        background-color: #0a53be;
+    }
+</style>
 <body>
 <div class='dashboard'>
     <div class="dashboard-nav">

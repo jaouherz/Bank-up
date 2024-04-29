@@ -94,7 +94,13 @@ if (isset($_POST['submit'])) {
     <!--  style-->
 
 </head>
+<style>
+    #header.header-inner-pages {
+        background: rgba(0, 125, 254, 255);
+        padding: 12px 0;
+    }
 
+</style>
 <body>
 
 <!-- ======= Header ======= -->
@@ -110,8 +116,7 @@ if (isset($_POST['submit'])) {
                 <li><a class="nav-link scrollto" href="about.html">About</a></li>
                 <li><a class="nav-link scrollto " href="terms.html">Terms and Condition</a></li>
                 <li><a class="nav-link scrollto" href="contact.html">Contact</a></li>
-                <li><a class="nav-link scrollto" href="signup.html">Sign Up</a></li>
-                <li><a class="nav-link scrollto" href="login.html">Login</a></li>
+                <li><a class="nav-link scrollto" href="signup.php">Sign Up</a></li>
 
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
@@ -126,40 +131,30 @@ if (isset($_POST['submit'])) {
             <div class="row d-flex justify-content-center mt-5">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                     <div class="card py-3 px-2">
-                        <p class="text-center mb-3 mt-2"> CONNECTER </p>
-                        <div class="row mx-auto ">
-                            <div class="col-4">
-                                <i class="fa fa-university"></i>
-                            </div>
-                            <div class="col-4">
-                                <i class="fa fa-microchip"></i>
-                            </div>
-                            <div class="col-4">
-                                <i class="fa  fa-id-card"></i>
-                            </div>
-                        </div>
+                        <p class="text-center mb-3 mt-2">LOGIN </p>
+
                         <div class="division">
                             <div class="row">
                                 <div class="col-3"><div class="line l"></div></div>
-                                <div class="col-6"><span>OU AVEC MON EMAIL</span></div>
+                                <div class="col-6"><span></span></div>
                                 <div class="col-3"><div class="line r"></div></div>
                             </div>
                         </div>
                         <form class="myform" method="post" action="">
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="email" name="email">
+                                <input type="email" class="form-control" placeholder="Email" name="email">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Mot de passe" name="password">
+                                <input type="password" class="form-control" placeholder="Password" name="password">
                             </div>
                             <div class="row">
                                 <div class="col-md-6 col-12">
                                     <div class="form-group form-check">
                                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Rester connecte</label>
+                                        <label class="form-check-label" for="exampleCheck1">Stay connected</label>
                                     </div>
                                 </div>
-                                <a class="col-md-6 col-12 bn" href="entermailforget.php">Mot de passe oublié</a>                            </div>
+                                <a class="col-md-6 col-12 bn" href="entermailforget.php">Forget password?</a>                            </div>
                             <div class="form-group mt-3">
                                 <button type="submit" class="btn btn-block btn-primary btn-lg" name="submit"><small><i class="far fa-user pr-2"></i>Se connecter</small></button>
                             </div>
@@ -172,51 +167,6 @@ if (isset($_POST['submit'])) {
 
 </main><!-- End #main -->
 
-<!-- ======= Footer ======= -->
-<footer id="footer">
-
-    <div class="footer-top">
-        <div class="container2">
-            <div class="row">
-
-                <div class="col-lg-3 col-md-6 footer-contact">
-                    <h3> Bank-up</h3>
-
-                </div>
-
-                <div class="col-lg-2 col-md-6 footer-links">
-
-                </div>
-
-                <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Our Services</h4>
-
-                </div>
-
-                <div class="col-lg-4 col-md-6 footer-newsletter">
-
-
-                    <h1 class="text-center mt-2">SKY BANK</h1>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-
-        <div class="copyright-wrap d-md-flex py-4">
-            <div class="me-md-auto text-center text-md-start">
-                <div class="copyright">
-                    &copy; Copyright <strong><span>Bank-up</span></strong>. All Rights Reserved
-                </div>
-                <div class="credits">
-                </div>
-
-        </div>
-
-    </div>
-</footer>
 
 
 

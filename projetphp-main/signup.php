@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top header-inner-pages">
     <div class="container d-flex align-items-center justify-content-between">
-        <h1 class="logo"><a href="../SkyBank/">Sky Bank</a></h1>
+        <h1 class="logo"><a href="../SkyBank/">Bank-Up</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -141,10 +141,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
                 <h1>Your info</h1>
                 <input type="text" half placeholder="First name" name="name" autocomplete="no">
                 <input type="text" half placeholder="Last name" name="lastname" autocomplete="no">
-                <input type="text" placeholder="Numtel" name="numtel" autocomplete="no">
-                <input type="date" half placeholder="date naissance" name="date_naissance" autocomplete="no">
-                <input type="text" half placeholder="adress" name="adress" autocomplete="no">
-                <input type="email" placeholder="e-Mail" name="email" autocomplete="no">
+                <input type="text" placeholder="Number" name="numtel" autocomplete="no">
+                <input type="date" half placeholder="date of birth" name="date_naissance" autocomplete="no">
+                <input type="text" half placeholder="address" name="adress" autocomplete="no">
+                <input type="email" placeholder="E-Mail" name="email" autocomplete="no">
                 <input type="password" placeholder="Password" name="password" autocomplete="no">
                 <input type="submit" value="Send it">
                 <select name="role">
