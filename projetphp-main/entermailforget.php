@@ -1,54 +1,60 @@
-
-
-<!DOCTYPE html>
 <?php
-session_start();
+require 'D:\xamp\htdocs\vendor\phpmailer\phpmailer\src\Exception.php';
+require 'D:\xamp\htdocs\vendor\phpmailer\phpmailer\src\PHPMailer.php';
+require 'D:\xamp\htdocs\vendor\phpmailer\phpmailer\src\SMTP.php';
+
+$db = new PDO('mysql:host=localhost;dbname=test', 'root', '');
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
-    $pass = $_POST['password'];
+    $stmt = $db->prepare("SELECT User_id FROM user WHERE Email = :email");
+    $stmt->execute(['email' => $email]);
+    $user = $stmt->fetch();
 
-    if (empty($email) || empty($pass)) {
-        // Handle empty email or password
-    } else {
-        $db = new PDO('mysql:host=localhost;dbname=test', 'root', '');
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    if ($user) {
+        $token = uniqid();
+        $expires_at = date('Y-m-d H:i:s', strtotime('+1 hour'));
+        $stmt = $db->prepare("UPDATE user SET token = :token, token_expires_at = :expires_at WHERE User_id = :id");
+        $stmt->execute(['token' => $token, 'expires_at' => $expires_at, 'id' => $user['User_id']]);
 
-        $stmt = $db->prepare("SELECT user.*, role.nom_role FROM user INNER JOIN role ON user.id_role = role.id_role 
-                          WHERE user.Email=:email");
-        $stmt->bindParam(':email', $email);
+        $mail = new PHPMailer(true);
+        try {
+            $mail->isSMTP();
+            $mail->Host       = 'smtp.gmail.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'jaouher3009@gmail.com';
+            $mail->Password   = 'degf ozkq sqvv eydt';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = 587;
 
-        $stmt->execute();
+            //Recipients
+            $mail->setFrom('your-email@example.com', 'BANK-UP');
+            $mail->addAddress($email);
 
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            //Content
+            $mail->isHTML(true);
+            $mail->Subject = 'Reset Your Password';
+            $mail->Body    = "Click this link to reset your password: http://localhost/projetphp-main/projetphp-main/changepassword.php?token=$token";
 
-        if ($user && password_verify($pass, $user['password'])) {
-            // Password is correct, set session and redirect
-            $_SESSION['role'] = $user['nom_role'];
-
-            // Redirect based on role name
-            switch ($user['nom_role']) {
-                case 'admin':
-                    header('Location: main.php');
-                    exit;
-                case 'client':
-                    header('Location: client.php');
-                    exit;
-                case 'agent':
-                    header('Location: agent.php');
-                    exit;
-                default:
-                    header('Location: index.php');
-                    exit;
-            }
-        } else {
-            // Invalid password
-            echo 'Invalid email or password';
+            $mail->send();
+            echo "Email sent with the link to reset your password.";
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
+    } else {
+        echo "User with this email not found.";
     }
 }
 ?>
 
+
+
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -76,14 +82,14 @@ if (isset($_POST['submit'])) {
 
     <!-- Google Fonts -->
     <link
-            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-            rel="stylesheet">
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="assets/vendor/aos/aos.css" rel="stylesheet">
     <link href="css/login.css" rel="stylesheet">
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-²    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    ²    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
@@ -126,42 +132,16 @@ if (isset($_POST['submit'])) {
             <div class="row d-flex justify-content-center mt-5">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                     <div class="card py-3 px-2">
-                        <p class="text-center mb-3 mt-2"> CONNECTER </p>
-                        <div class="row mx-auto ">
-                            <div class="col-4">
-                                <i class="fa fa-university"></i>
-                            </div>
-                            <div class="col-4">
-                                <i class="fa fa-microchip"></i>
-                            </div>
-                            <div class="col-4">
-                                <i class="fa  fa-id-card"></i>
-                            </div>
-                        </div>
-                        <div class="division">
-                            <div class="row">
-                                <div class="col-3"><div class="line l"></div></div>
-                                <div class="col-6"><span>OU AVEC MON EMAIL</span></div>
-                                <div class="col-3"><div class="line r"></div></div>
-                            </div>
-                        </div>
+                        <p class="text-center mb-3 mt-2"> Mot de passe oublié </p>
+                        <p style="text-align: center">saisir votre email :</p> <hr>
+
                         <form class="myform" method="post" action="">
                             <div class="form-group">
                                 <input type="email" class="form-control" placeholder="email" name="email">
                             </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Mot de passe" name="password">
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Rester connecte</label>
-                                    </div>
-                                </div>
-                                <a class="col-md-6 col-12 bn" href="entermailforget.php">Mot de passe oublié</a>                            </div>
+
                             <div class="form-group mt-3">
-                                <button type="submit" class="btn btn-block btn-primary btn-lg" name="submit"><small><i class="far fa-user pr-2"></i>Se connecter</small></button>
+                                <button type="submit" class="btn btn-block btn-primary btn-lg" name="submit"><small><i class="far fa-user pr-2"></i>valider</small></button>
                             </div>
                         </form>
                     </div>
@@ -213,9 +193,9 @@ if (isset($_POST['submit'])) {
                 <div class="credits">
                 </div>
 
-        </div>
+            </div>
 
-    </div>
+        </div>
 </footer>
 
 

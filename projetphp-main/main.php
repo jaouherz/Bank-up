@@ -11,7 +11,16 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $stmt = $db->query("SELECT user.*, role.nom_role FROM user INNER JOIN role ON user.id_role = role.id_role WHERE role.nom_role='agent'");
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
+    $id = $_POST['id'];
+    $db = new PDO('mysql:host=localhost;dbname=test', 'root', '');
+    $stmt = $db->prepare("DELETE FROM user WHERE User_id = :id");
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    // Return a success message
+    echo "User deleted successfully.";
+    exit;
+}
 
 
 ?>
@@ -74,9 +83,10 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <th class="table-data"><?php echo $user['Firstname']; ?></th>
                     <th class="table-data"><?php echo $user['Email']; ?></th>
                         <th class="table-data"><?php echo $user['nom_role']; ?></th>
-                        <th  class="table-data">
-                        <button class="btn btn-secondary">Edit</button> </th>
-                      <th > <button class="btn btn-danger">Delete</button></th>
+                        <th class="table-data">
+                            <a href="updateuser.php?id=<?php echo $user['User_id']; ?>" class="btn btn-secondary">Edit</a>
+                        </th>
+                      <th > <button class="btn btn-danger" onclick="deleteUser(<?php echo $user['User_id']; ?>)">Delete</button></th>
 
 
 
@@ -107,6 +117,25 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
         });
     });
 </script>
+
+
+        <script>
+            function deleteUser(userId) {
+                if (confirm("Are you sure you want to delete user " + userId + "?")) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "main.php", true);
+                    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            alert(xhr.responseText);
+                            location.reload();
+                        }
+                    };
+                    xhr.send("id=" + userId);
+                }
+            }
+        </script>
+
 </body>
 
 </html>
