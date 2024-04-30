@@ -9,7 +9,7 @@ if (isset($_POST['submit'])) {
     $pass = $_POST['password'];
 
     if (empty($email) || empty($pass)) {
-        // Handle empty email or password
+
     } else {
         $db = new PDO('mysql:host=localhost;dbname=test', 'root', '');
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -23,10 +23,7 @@ if (isset($_POST['submit'])) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($pass, $user['password'])) {
-            // Password is correct, set session and redirect
             $_SESSION['role'] = $user['nom_role'];
-
-            // Redirect based on role name
             switch ($user['nom_role']) {
                 case 'admin':
                     header('Location: main.php');
@@ -42,7 +39,6 @@ if (isset($_POST['submit'])) {
                     exit;
             }
         } else {
-            // Invalid password
             echo 'Invalid email or password';
         }
     }

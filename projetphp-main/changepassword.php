@@ -3,7 +3,6 @@
 $db = new PDO('mysql:host=localhost;dbname=test', 'root', '');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-
 if (isset($_GET['token'])) {
     $token = $_GET['token'];
     $stmt = $db->prepare("SELECT User_id FROM user WHERE token = :token AND token_expires_at > NOW()");
@@ -28,11 +27,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['new_password']) && iss
     }
     $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
     $stmt = $db->prepare("UPDATE user SET password = :password WHERE User_id = :id");
-    $stmt->execute(['password' => $hashedPassword, 'id' => $user['User_id']]);
-    echo "Password updated successfully.";
+    $result = $stmt->execute(['password' => $hashedPassword, 'id' => $user['User_id']]);
+    if ($result) {
+        echo "Password updated successfully.";
+    } else {
+        echo "Failed to update password.";
+    }
 }
-
-
 
 ?>
 <html lang="en">
@@ -50,14 +51,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['new_password']) && iss
             <div class="card">
                 <div class="card-header">Change Password</div>
                 <div class="card-body">
-                    <form method="POST" action="change_password.php">
+                    <form method="POST" >
                         <div class="mb-3">
                             <label for="newPassword" class="form-label">New Password</label>
-                            <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                            <input type="password" class="form-control" id="newPassword" name="new_password" required>
                         </div>
                         <div class="mb-3">
                             <label for="confirmPassword" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                            <input type="password" class="form-control" id="confirmPassword" name="confirm_password" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Change Password</button>
                     </form>
