@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
                 <img src="images/img_2.png" class="iconimg"> <span>MENU</span></a></header>
         <nav class="dashboard-nav-list"><a href="#" class="dashboard-nav-item"><img src="images/img_3.png" class="iconimg">
                 Home </a><a
-                    href="#" class="dashboard-nav-item active"><img src="images/img_4.png" class="iconimg"> dashboard
+                    href="signup.php" class="dashboard-nav-item active"><img src="images/img_4.png" class="iconimg"> Add User
             </a>
             <div class='dashboard-nav-dropdown'><a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><img src="images/img_5.png" class="iconimg"> Users </a>
                 <div class='dashboard-nav-dropdown-menu'><a href="#"

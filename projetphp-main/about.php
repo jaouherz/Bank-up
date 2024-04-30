@@ -49,10 +49,10 @@
     <nav id="navbar" class="navbar">
       <ul>
         <li><a class="nav-link scrollto " href="index.html">Home</a></li>
-        <li><a class="nav-link scrollto" style="cursor: pointer" >About</a></li>
         <li><a class="nav-link scrollto " href="terms.html">Terms and Condition</a></li>
         <li><a class="nav-link scrollto" href="contact.php">Contact</a></li>
-        <li><a class="nav-link scrollto" href="signup.php">Sign Up</a></li>
+          <li><a class="nav-link scrollto" href="login.php">Login</a></li>
+
 
       </ul>
       <i class="bi bi-list mobile-nav-toggle"></i>
