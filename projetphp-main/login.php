@@ -31,14 +31,14 @@ if (isset($_POST['submit'])) {
                 case 'admin':
                     header('Location: main.php');
                     exit;
-                case 'client':
+                case 'user':
                     header('Location: client.php');
                     exit;
                 case 'agent':
                     header('Location: agent.php');
                     exit;
                 default:
-                    header('Location: index.php');
+                    header('Location: index.html');
                     exit;
             }
         } else {
@@ -157,7 +157,7 @@ section {
                                 </div>
                                 <a class="col-md-6 col-12 bn" href="entermailforget.php">Forget password?</a>                            </div>
                             <div class="form-group mt-3">
-                                <button type="submit" class="btn btn-block btn-primary btn-lg" name="submit"><small><i class="far fa-user pr-2"></i>Se connecter</small></button>
+                                <button type="submit" class="btn btn-block btn-primary btn-lg" name="submit"><small><i class="far fa-user pr-2"></i>Login</small></button>
                             </div>
                         </form>
                     </div>

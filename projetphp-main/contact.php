@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>24x7 Services Sky Bank</title>
+  <title>Bank-Up</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -224,7 +224,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
         <li><a class="nav-link scrollto " href="index.html">Home</a></li>
         <li><a class="nav-link scrollto" href="about.php">About</a></li>
         <li><a class="nav-link scrollto " href="terms.html">Terms and Condition</a></li>
-        <li><a class="nav-link scrollto" style="cursor: pointer">Contact</a></li>
+          <li><a class="nav-link scrollto" href="login.php">Login</a></li>
 
       </ul>
       <i class="bi bi-list mobile-nav-toggle"></i>
