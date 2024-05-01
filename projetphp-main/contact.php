@@ -1,11 +1,12 @@
 
 <!DOCTYPE html>
 <?php
+global$db;
+include 'config db.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $message = $_POST['message'];
-    $db = new PDO('mysql:host=localhost;dbname=test', 'root', '');
 
     $stmt = $db->prepare("INSERT INTO contact_us (name, email, message) VALUES (:name, :email, :message)");
     $stmt->bindParam(':name', $name);

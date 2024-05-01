@@ -2,8 +2,8 @@
 require 'D:\xamp\htdocs\vendor\phpmailer\phpmailer\src\Exception.php';
 require 'D:\xamp\htdocs\vendor\phpmailer\phpmailer\src\PHPMailer.php';
 require 'D:\xamp\htdocs\vendor\phpmailer\phpmailer\src\SMTP.php';
-
-$db = new PDO('mysql:host=localhost;dbname=test', 'root', '');
+global$db;
+include 'config db.php';
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 

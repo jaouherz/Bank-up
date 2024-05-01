@@ -1,6 +1,8 @@
-
 <!DOCTYPE html>
 <?php
+global$db;
+include 'config db.php';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
@@ -10,7 +12,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
     $adress = $_POST['adress'];
     $id_role = $_POST['role'];; // Assuming the role value is passed as a POST parameter
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    $db = new PDO('mysql:host=localhost;dbname=test', 'root', '');
 
     $stmt = $db->prepare("INSERT INTO user (Firstname, Email, password, Numtel, Date_N, Adresse, id_role) VALUES (:name, :email, :password, :numtel, :date_naissance, :adress, :id_role)");
     $stmt->bindParam(':name', $name);
@@ -50,6 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
 
 </head>
 <body>
+
 </body>
 </html>
 <!DOCTYPE html>
@@ -151,7 +153,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
 
                 <select name="role">
                     <?php
-                    $db = new PDO('mysql:host=localhost;dbname=test', 'root', '');
 
                     $stmt = $db->query("SELECT * FROM role");
                     $roles = $stmt->fetchAll(PDO::FETCH_ASSOC);
