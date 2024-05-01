@@ -5,6 +5,7 @@
 session_start();
 global$db;
 include 'config db.php';
+
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $pass = $_POST['password'];
@@ -26,7 +27,7 @@ if (isset($_POST['submit'])) {
             $_SESSION['role'] = $user['nom_role'];
             switch ($user['nom_role']) {
                 case 'admin':
-                    header('Location: main.php');
+                    header('Location: myaccount.php');
                     exit;
                 case 'user':
                     header('Location: client.php');
@@ -44,7 +45,13 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
-
+<script>
+    // Check if the user role is set in the session
+    <?php if(isset($_SESSION['role'])) : ?>
+    // Save the user role to local storage
+    localStorage.setItem('userRole', '<?php echo $user['nom_role']; ?>');
+    <?php endif; ?>
+</script>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -53,6 +60,7 @@ if (isset($_POST['submit'])) {
 
 </head>
 <body>
+
 </body>
 </html>
 <!DOCTYPE html>
