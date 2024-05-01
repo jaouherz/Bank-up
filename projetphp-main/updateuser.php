@@ -41,6 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update User</title>
 
+
 </head>
 <body>
 </body>
@@ -101,7 +102,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
                 <li><a class="nav-link scrollto" href="about.php">About</a></li>
                 <li><a class="nav-link scrollto " href="terms.html">Terms and Condition</a></li>
                 <li><a class="nav-link scrollto" href="contact.php">Contact</a></li>
-                <li><a class="nav-link scrollto" style="cursor: pointer">Sign Up</a></li>
 
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
@@ -132,15 +132,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
 
             <form autocomplete="off" method="POST">
                 <div id="focus"></div>
-                <h1>Your info</h1>
-                <input type="text" half placeholder="First name" name="name" value="<?php echo isset($name) ? $name : ''; ?>" autocomplete="no">
-                <input type="text" half placeholder="Last name" name="lastname" value="<?php echo isset($lastname) ? $lastname : ''; ?>" autocomplete="no">
-                <input type="text" placeholder="Number" name="numtel" value="<?php echo isset($numtel) ? $numtel : ''; ?>" autocomplete="no">
-                <input type="date" half placeholder="Date of birth" name="date_naissance" value="<?php echo isset($date_naissance) ? $date_naissance : ''; ?>" autocomplete="no">
-                <input type="text" half placeholder="address" name="adress" value="<?php echo isset($adress) ? $adress : ''; ?>" autocomplete="no">
-                <input type="email" placeholder="e-Mail" name="email" value="<?php echo isset($email) ? $email : ''; ?>" autocomplete="no">
-                <input type="password" placeholder="Password" name="password" autocomplete="no">
-                <input type="submit" value="Send it">
+                <h1>Update User</h1>
+                <input type="text" half placeholder="First name" name="name" autocomplete="no" required>
+                <input type="text" half placeholder="Last name" name="lastname" autocomplete="no" required>
+                <input type="number" half placeholder="Numtel" name="numtel" autocomplete="no" required>
+                <input type="number" half placeholder="num compte" name="numcompte" autocomplete="no" required>
+                <input type="email"  half placeholder="e-Mail" name="email" autocomplete="no" required>
+                <input type="password" half placeholder="Password" name="password" autocomplete="no" required>
+                <input type="date" half placeholder="date naissance" name="date_naissance" autocomplete="no" required>
+                <input type="text" half placeholder="adress" name="adress" autocomplete="no" required>
                 <select name="role">
                     <?php
                     $stmt = $db->query("SELECT * FROM role");
@@ -151,6 +151,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
                     }
                     ?>
                 </select>
+                <input type="submit" value="Send it">
+
             </form>
 
 
