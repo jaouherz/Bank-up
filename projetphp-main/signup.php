@@ -1,6 +1,8 @@
-
 <!DOCTYPE html>
 <?php
+global$db;
+include 'config db.php';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
@@ -10,7 +12,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
     $adress = $_POST['adress'];
     $id_role = $_POST['role'];; // Assuming the role value is passed as a POST parameter
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    $db = new PDO('mysql:host=localhost;dbname=test', 'root', '');
 
     $stmt = $db->prepare("INSERT INTO user (Firstname, Email, password, Numtel, Date_N, Adresse, id_role) VALUES (:name, :email, :password, :numtel, :date_naissance, :adress, :id_role)");
     $stmt->bindParam(':name', $name);
@@ -46,10 +47,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+    <title>Add User</title>
 
 </head>
 <body>
+
 </body>
 </html>
 <!DOCTYPE html>
@@ -59,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>24x7 Services Sky Bank</title>
+    <title>Bank-Up</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -124,7 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
             <div class="d-flex justify-content-between align-items-center">
                 <ol>
                     <li><a href="index.html">Home</a></li>
-                    <li>Contact us</li>
+                    <li>Add User</li>
                 </ol>
             </div>
 
@@ -140,17 +142,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
                 <h1>Add User</h1>
                 <input type="text" half placeholder="First name" name="name" autocomplete="no" required>
                 <input type="text" half placeholder="Last name" name="lastname" autocomplete="no" required>
-                <input type="number" half placeholder="Numtel" name="numtel" autocomplete="no" required>
-                <input type="number" half placeholder="num compte" name="numcompte" autocomplete="no" required>
+                <input type="text" half placeholder="Phone number" name="numtel" autocomplete="no" required>
+                <input type="text" half placeholder="Account number" name="numcompte" autocomplete="no" required>
                 <input type="email"  half placeholder="e-Mail" name="email" autocomplete="no" required>
                 <input type="password" half placeholder="Password" name="password" autocomplete="no" required>
-                <input type="date" half placeholder="date naissance" name="date_naissance" autocomplete="no" required>
-                <input type="text" half placeholder="adress" name="adress" autocomplete="no" required>
+                <input type="date" half placeholder="date of birth" name="date_naissance" autocomplete="no" required>
+                <input type="text" half placeholder="address" name="adress" autocomplete="no" required>
 
 
                 <select name="role">
                     <?php
-                    $db = new PDO('mysql:host=localhost;dbname=test', 'root', '');
 
                     $stmt = $db->query("SELECT * FROM role");
                     $roles = $stmt->fetchAll(PDO::FETCH_ASSOC);

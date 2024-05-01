@@ -1,15 +1,15 @@
 
 <?php
 session_start();
-
+global$db;
+include 'config db.php';
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $pass = $_POST['password'];
 
     if (empty($email) || empty($pass)) {
-        // Handle empty email or password
+
     } else {
-        $db = new PDO('mysql:host=localhost;dbname=test', 'root', '');
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $stmt = $db->prepare("SELECT user.*, role.nom_role FROM user INNER JOIN role ON user.id_role = role.id_role  
@@ -21,26 +21,22 @@ if (isset($_POST['submit'])) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($pass, $user['password'])) {
-            // Password is correct, set session and redirect
             $_SESSION['role'] = $user['nom_role'];
-
-            // Redirect based on role name
             switch ($user['nom_role']) {
                 case 'admin':
                     header('Location: main.php');
                     exit;
-                case 'client':
+                case 'user':
                     header('Location: client.php');
                     exit;
                 case 'agent':
                     header('Location: agent.php');
                     exit;
                 default:
-                    header('Location: index.php');
+                    header('Location: index.html');
                     exit;
             }
         } else {
-            // Invalid password
             echo 'Invalid email or password';
         }
     }
@@ -189,7 +185,7 @@ if (isset($_POST['submit'])) {
                                 <a class="col-md-6 col-12 bn" href="entermailforget.php">Forget password?</a>
                             </div>
                             <div class="form-group mt-3">
-                                <button type="submit" class="btn btn-block btn-primary btn-lg" name="submit"><small><i class="far fa-user pr-2"></i>Se connecter</small></button>
+                                <button type="submit" class="btn btn-block btn-primary btn-lg" name="submit"><small><i class="far fa-user pr-2"></i>Login</small></button>
                             </div>
                         </form>
                             </section>
