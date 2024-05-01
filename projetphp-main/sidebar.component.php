@@ -5,53 +5,50 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="sidebar.component.css"></head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<body><div class="area"></div><nav class="main-menu" >
+<body>
+<div class="logo">
+    <img src="24016483-removebg-preview.png" alt="Logo">
+</div>
+<div class="area"></div><nav class="main-menu" >
     <ul>
-        <li *ngIf="isrecette"routerLink="/dashboard">
+        <li >
             <a>
                 <i class="fa fa-line-chart fa-2x"></i>
                 <span class="nav-text">
-                          Consulter le Tableau de bord
+                          consulter mes transaction
                         </span>
             </a>
 
         </li>
-        <li class="has-subnav" *ngIf="isrecette"routerLink="/makeint">
+        <li >
             <a>
                 <i class="fa fa-handshake-angle fa-2x" ></i>
                 <span class="nav-text">
-                            Faire une intervention
+                            Faire une transaction
                         </span>
 
             </a>
         </li>
-        <li class="has-subnav" *ngIf="isrecette"routerLink="/Seance">
+        <li class="has-subnav" >
             <a>
                 <i class="fa fa-calendar fa-2x"></i>
                 <span class="nav-text">
-                            Consulter la calendrier
+                            mes demandes
                         </span>
             </a>
 
         </li>
 
-        <li class="has-subnav" *ngIf="!isrecette"routerLink="/Seance">
+        <li >
             <a>
                 <i class="fa fa-calendar-days fa-2x"></i>
                 <span class="nav-text">
-                            Consulter mes séances
+                            mon profile
                         </span>
             </a>
 
-        <li class="has-subnav" *ngIf="!isrecette" routerLink="/listseance">
-            <a>
-                <i class="fa fa-user-clock fa-2x"><span class="notification"</span></i>
-                <span class="nav-text">Gérer mes séances</span>
 
-            </a>
-        </li>
-
-        <li *ngIf="!isrecette"class="has-subnav" routerLink="/list">
+        <li >
             <a>
                 <i class="fa fa-list fa-2x"  ></i>
                 <span class="nav-text" >
@@ -60,7 +57,7 @@
 
             </a>
         </li>
-        <li *ngIf="isrecette" class="has-subnav" routerLink="/seancebyproject">
+        <li >
             <a>
                 <i class="fa fa-list-ul fa-2x"  ></span></i>
                 <span class="nav-text" >
