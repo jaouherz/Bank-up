@@ -1,7 +1,8 @@
 
 <!DOCTYPE html>
 <?php
-$db = new PDO('mysql:host=localhost;dbname=test', 'root', '');
+global$db;
+include 'config db.php';
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {

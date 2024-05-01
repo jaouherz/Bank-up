@@ -1,11 +1,11 @@
 <?php
 
 
+global$db;
+include 'config db.php';
 
 
 
-
-$db = new PDO('mysql:host=localhost;dbname=test', 'root', '');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $stmt = $db->query("SELECT user.*, role.nom_role FROM user INNER JOIN role ON user.id_role = role.id_role WHERE role.nom_role='agent'");

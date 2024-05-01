@@ -3,7 +3,8 @@
 <!DOCTYPE html>
 <?php
 session_start();
-
+global$db;
+include 'config db.php';
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $pass = $_POST['password'];
@@ -11,7 +12,6 @@ if (isset($_POST['submit'])) {
     if (empty($email) || empty($pass)) {
 
     } else {
-        $db = new PDO('mysql:host=localhost;dbname=test', 'root', '');
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $stmt = $db->prepare("SELECT user.*, role.nom_role FROM user INNER JOIN role ON user.id_role = role.id_role 

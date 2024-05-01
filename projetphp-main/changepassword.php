@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
-$db = new PDO('mysql:host=localhost;dbname=test', 'root', '');
+global$db;
+include 'config db.php';
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 if (isset($_GET['token'])) {
