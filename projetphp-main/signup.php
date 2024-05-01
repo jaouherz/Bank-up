@@ -107,7 +107,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
                 <li><a class="nav-link scrollto" href="about.php">About</a></li>
                 <li><a class="nav-link scrollto " href="terms.html">Terms and Condition</a></li>
                 <li><a class="nav-link scrollto" href="contact.html">Contact</a></li>
-                <li><a class="nav-link scrollto" style="cursor: pointer" href="login.php">Login</a></li>
 
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
@@ -136,7 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
         <div class="container">
 
 
-            <form autocomplete="off" method="POST">
+            <form id="addUserForm" autocomplete="off" method="POST">
                 <div id="focus"></div>
                 <h1>Add User</h1>
                 <input type="text" half placeholder="First name" name="name" autocomplete="no" required>
