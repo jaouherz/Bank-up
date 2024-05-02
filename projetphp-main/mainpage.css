@@ -6,8 +6,10 @@
   font-family: 'Rocher';
   src: url(https://assets.codepen.io/9632/RocherColorGX.woff2);
 }
-.box {
+body{
   background-color:#e8eaf6;
+}
+.box {
   display: flex;
 }
 
@@ -45,6 +47,8 @@
 .main-menu {
   background: rgb(44, 134, 243);
   border-right: 1px solid #e5e5e5;
+  border-radius: 10px;
+
   position: fixed;
   top: 0; /* Changed to top: 0 to start from the top of the page */
   left: 0;
@@ -54,7 +58,6 @@
   transition: width .05s linear;
   transform: translateZ(0) scale(1, 1);
   z-index: 1000;
-  border-radius: 10px;
 }
 .main-menu>ul {
   margin:7px 0;
@@ -187,6 +190,15 @@ section {
   border-radius: 15px;
 }
 .pagetitle{
+  padding: 18px 31px;
+  background-color: white;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: flex-end;
+}
+.container-box{
   padding: 18px 31px;
   background-color: white;
   border-radius: 15px;
