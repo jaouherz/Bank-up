@@ -108,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
                 <li><a class="nav-link scrollto " href="index.html">Home</a></li>
                 <li><a class="nav-link scrollto" href="about.php">About</a></li>
                 <li><a class="nav-link scrollto " href="terms.html">Terms and Condition</a></li>
-                <li><a class="nav-link scrollto" href="contact.html">Contact</a></li>
+                <li><a class="nav-link scrollto" href="contact.php">Contact</a></li>
 
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
