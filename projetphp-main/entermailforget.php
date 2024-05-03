@@ -77,8 +77,8 @@ if (isset($_POST['submit'])) {
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="../assets/img/favicon-32x32.png" rel="icon">
-    <link href="../assets/img/apple-icon-180x180.png" rel="apple-touch-icon">
+    <link href="assets/img/favicon-32x32.png" rel="icon">
+    <link href="assets/img/apple-icon-180x180.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link
@@ -86,17 +86,17 @@ if (isset($_POST['submit'])) {
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
     <link href="css/login.css" rel="stylesheet">
-    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    ²    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    ²    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
     <!-- Template Main CSS File -->
-    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
     <!--  style-->
 
 </head>
@@ -115,7 +115,7 @@ if (isset($_POST['submit'])) {
                 <li><a class="nav-link scrollto " href="index.html">Home</a></li>
                 <li><a class="nav-link scrollto" href="about.html">About</a></li>
                 <li><a class="nav-link scrollto " href="terms.html">Terms and Condition</a></li>
-                <li><a class="nav-link scrollto" href="../contact.php">Contact</a></li>
+                <li><a class="nav-link scrollto" href="contact.php">Contact</a></li>
                 <li><a class="nav-link scrollto" href="signup.html">Sign Up</a></li>
                 <li><a class="nav-link scrollto" href="login.html">Login</a></li>
 
