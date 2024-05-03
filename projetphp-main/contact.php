@@ -222,10 +222,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
 
     <nav id="navbar" class="navbar">
       <ul>
-        <li><a class="nav-link scrollto " href="index.html">Home</a></li>
-        <li><a class="nav-link scrollto" href="about.php">About</a></li>
-        <li><a class="nav-link scrollto " href="terms.html">Terms and Condition</a></li>
-          <li><a class="nav-link scrollto" href="login.php">Login</a></li>
+        <li><a class="nav-link scrollto " href="BeforeloginInterfaces/index.html">Home</a></li>
+        <li><a class="nav-link scrollto" href="BeforeloginInterfaces/about.php">About</a></li>
+        <li><a class="nav-link scrollto " href="BeforeloginInterfaces/terms.html">Terms and Condition</a></li>
+          <li><a class="nav-link scrollto" href="BeforeloginInterfaces/login.php">Login</a></li>
 
       </ul>
       <i class="bi bi-list mobile-nav-toggle"></i>
@@ -242,7 +242,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
 
       <div class="d-flex justify-content-between align-items-center">
         <ol>
-          <li><a href="index.html">Home</a></li>
+          <li><a href="BeforeloginInterfaces/index.html">Home</a></li>
           <li>Contact us</li>
         </ol>
       </div>

@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
 
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="mainpage.css"></head>
+    <link rel="stylesheet" type="text/css" href="../css/mainpage.css"></head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 </head>
@@ -214,8 +214,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
 
         <ul>
             <div class="logo">
-                <img src="$RHR3ED6.png" alt="Logo">
-                <img src="$RRTVBNQ.png" style="margin-left: -27px">
+                <img src="../$RHR3ED6.png" alt="Logo">
+                <img src="../$RRTVBNQ.png" style="margin-left: -27px">
             </div>
             <li >
                 <a>
@@ -319,7 +319,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
                             <th class="table-data"><?php echo $user['Email']; ?></th>
 
                             <th class="table-data">
-                                <a href="updateuser.php?id=<?php echo $user['User_id']; ?>" class="btn btn-secondary">Edit</a>
+                                <a href="../BeforeloginInterfaces/updateuser.php?id=<?php echo $user['User_id']; ?>" class="btn btn-secondary">Edit</a>
                             </th>
                             <th > <button class="btn btn-danger" onclick="deleteUser(<?php echo $user['User_id']; ?>)">Delete</button></th>
 
@@ -333,7 +333,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
         </div>
         <div class="col-12 px-0 mb-4" >
             <div class="container-box" style="    background-color: transparent">
-                <button class='glowing-btn' ><a href="signup.php"><span class='glowing-txt'>ADD<span class='faulty-letter'>-</span>AGENT</span></a></button>
+                <button class='glowing-btn' ><a href="../BeforeloginInterfaces/signup.php"><span class='glowing-txt'>ADD<span class='faulty-letter'>-</span>AGENT</span></a></button>
             </div>
         </div>
     </div>
