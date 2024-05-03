@@ -214,8 +214,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
 
         <ul>
             <div class="logo">
-                <img src="../$RHR3ED6.png" alt="Logo">
-                <img src="../$RRTVBNQ.png" style="margin-left: -27px">
+                <img src="../images/$RHR3ED6.png" alt="Logo">
+                <img src="../images/$RRTVBNQ.png" style="margin-left: -27px">
             </div>
             <li >
                 <a>
