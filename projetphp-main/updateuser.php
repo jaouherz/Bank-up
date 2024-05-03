@@ -1,13 +1,37 @@
 
 <!DOCTYPE html>
 <?php
-global$db;
+global $db;
 include 'config db.php';
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
     // Process form submission
-    // ...
+    $name = $_POST['name'];
+    $lastname = $_POST['lastname'];
+    $numtel = $_POST['numtel'];
+    $email = $_POST['email'];
+    $password = $_POST['password']; // Note: It's advisable to hash the password before storing it.
+    $date_naissance = $_POST['date_naissance'];
+    $adress = $_POST['adress'];
+    $role = $_POST['role'];
+
+    // Update user information in the database
+    $stmt = $db->prepare("UPDATE user SET Firstname = :name, Lastname = :lastname, Numtel = :numtel, Email = :email, Password = :password, Date_N = :date_naissance, Adresse = :adress, id_role = :role WHERE User_id = :id");
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':lastname', $lastname);
+    $stmt->bindParam(':numtel', $numtel);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':password', $password);
+    $stmt->bindParam(':date_naissance', $date_naissance);
+    $stmt->bindParam(':adress', $adress);
+    $stmt->bindParam(':role', $role);
+    $stmt->bindParam(':id', $_GET['id']); // Assuming the 'id' parameter is always present in the URL
+    $stmt->execute();
+
+    // Redirect to a confirmation page or display a success message
+    header("Location: main.php"); // Redirect to a success page
+    exit(); // Ensure script execution stops here
 } else {
     // Check if user ID is provided in the URL
     if (isset($_GET['id'])) {
@@ -24,9 +48,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
             $name = $user['Firstname'];
             $lastname = $user['Lastname'];
             $numtel = $user['Numtel'];
+            $email = $user['Email'];
             $date_naissance = $user['Date_N'];
             $adress = $user['Adresse'];
-            $email = $user['Email'];
             $role = $user['id_role'];
         }
     }
@@ -35,12 +59,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
 
 
 
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update User</title>
-
 
 </head>
 <body>
@@ -63,8 +87,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
 
     <!-- Google Fonts -->
     <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="assets/vendor/aos/aos.css" rel="stylesheet">
@@ -133,15 +157,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
             <form autocomplete="off" method="POST">
                 <div id="focus"></div>
                 <h1>Update User</h1>
-                <input type="text" half placeholder="First name" name="name" autocomplete="no" required>
-                <input type="text" half placeholder="Last name" name="lastname" autocomplete="no" required>
-                <input type="number" half placeholder="Numtel" name="numtel" autocomplete="no" required>
-                <input type="number" half placeholder="num compte" name="numcompte" autocomplete="no" required>
-                <input type="email"  half placeholder="e-Mail" name="email" autocomplete="no" required>
-                <input type="password" half placeholder="Password" name="password" autocomplete="no" required>
-                <input type="date" half placeholder="date naissance" name="date_naissance" autocomplete="no" required>
-                <input type="text" half placeholder="adress" name="adress" autocomplete="no" required>
-                <select name="role">
+                <input type="text" half placeholder="First name" name="name" value="<?php echo isset($name) ? $name : ''; ?>" autocomplete="no">
+                <input type="text" half placeholder="Last name" name="lastname" value="<?php echo isset($lastname) ? $lastname : ''; ?>" autocomplete="no">
+                <input type="text" placeholder="Phone Number" name="numtel" value="<?php echo isset($numtel) ? $numtel : ''; ?>" autocomplete="no">
+                <input type="date" half placeholder="Date of birth" name="date_naissance" value="<?php echo isset($date_naissance) ? $date_naissance : ''; ?>" autocomplete="no">
+                <input type="text" half placeholder="address" name="adress" value="<?php echo isset($adress) ? $adress : ''; ?>" autocomplete="no">
+                <input type="email" half placeholder="e-Mail" name="email" value="<?php echo isset($email) ? $email : ''; ?>" autocomplete="no">
+                <input type="password"  placeholder="Password" name="password" autocomplete="no">
+                <select  name="role" >
                     <?php
                     $stmt = $db->query("SELECT * FROM role");
                     $roles = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -152,7 +175,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
                     ?>
                 </select>
                 <input type="submit" value="Send it">
-
             </form>
 
 
@@ -164,7 +186,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
 
 
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-        class="bi bi-arrow-up-short"></i></a>
+            class="bi bi-arrow-up-short"></i></a>
 <div id="preloader"></div>
 
 <!-- Vendor JS Files -->
@@ -190,7 +212,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
         modal.style.display = "none";
     }
 
-    // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";

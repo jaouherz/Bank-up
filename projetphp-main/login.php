@@ -98,6 +98,7 @@ if (isset($_POST['submit'])) {
 section {
     margin-top:70px;
 }
+
 </style>
 <body>
 
@@ -137,7 +138,7 @@ section {
                                 <div class="col-3"><div class="line r"></div></div>
                             </div>
                         </div>
-                        <form class="myform" method="post" action="">
+                        <form class="frm" method="post" action="">
                             <div class="form-group">
                                 <input type="email" class="form-control" placeholder="Email" name="email">
                             </div>

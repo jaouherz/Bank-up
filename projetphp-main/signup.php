@@ -1,20 +1,21 @@
-<!DOCTYPE html>
 <?php
-global$db;
+global $db;
 include 'config db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
     $name = $_POST['name'];
+    $lastname = $_POST['lastname']; // Récupération du champ Last Name
     $email = $_POST['email'];
     $password = $_POST['password'];
     $numtel = $_POST['numtel'];
     $date_naissance = $_POST['date_naissance'];
     $adress = $_POST['adress'];
-    $id_role = $_POST['role'];; // Assuming the role value is passed as a POST parameter
+    $id_role = $_POST['role']; // Assuming the role value is passed as a POST parameter
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    $stmt = $db->prepare("INSERT INTO user (Firstname, Email, password, Numtel, Date_N, Adresse, id_role) VALUES (:name, :email, :password, :numtel, :date_naissance, :adress, :id_role)");
+    $stmt = $db->prepare("INSERT INTO user (Firstname, Lastname, Email, password, Numtel, Date_N, Adresse, id_role) VALUES (:name, :lastname, :email, :password, :numtel, :date_naissance, :adress, :id_role)");
     $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':lastname', $lastname); // Liaison du champ Last Name
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':password', $hashed_password);
     $stmt->bindParam(':numtel', $numtel);
@@ -40,8 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
     }
 }
 ?>
-
-
 
 <html lang="en">
 <head>
@@ -108,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
                 <li><a class="nav-link scrollto " href="index.html">Home</a></li>
                 <li><a class="nav-link scrollto" href="about.php">About</a></li>
                 <li><a class="nav-link scrollto " href="terms.html">Terms and Condition</a></li>
-                <li><a class="nav-link scrollto" href="contact.php">Contact</a></li>
+                <li><a class="nav-link scrollto" href="contact.html">Contact</a></li>
 
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
@@ -199,7 +198,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
         modal.style.display = "none";
     }
 
-    // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
