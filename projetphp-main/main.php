@@ -23,9 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
 
 
 ?>
-<?php
-include "sidebar.php"
-?>
+
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 
@@ -37,7 +35,9 @@ include "sidebar.php"
 </head>
 
 <body>
-
+<?php
+include "sidebar.php"
+?>
     <div class="container">
         <div class="col-12 px-0 mb-4 ">
             <div class="pagetitle">
