@@ -17,7 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
     $stmt = $db->prepare("DELETE FROM user WHERE User_id = :id");
     $stmt->bindParam(':id', $id);
     $stmt->execute();
-    // Return a success message
     echo "User deleted successfully.";
     exit;
 }
