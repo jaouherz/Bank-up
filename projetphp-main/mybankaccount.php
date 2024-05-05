@@ -1,4 +1,33 @@
+
 <html>
+<?php
+session_start();
+include 'config db.php'; // Assuming this file contains the database connection code
+
+// Check if the user is logged in
+if (!isset($_SESSION['id']) || empty($_SESSION['id'])) {
+    header('Location: login.php');
+}
+global$db;
+$userid = $_SESSION['id'];
+
+// Fetch user data based on ID
+$stmt = $db->prepare("SELECT * FROM bank_account AS b
+                      INNER JOIN transaction AS t
+                      ON t.compte_sender = b.id_account OR b.id_account = t.compte_receiver
+                      WHERE id_user = :id");
+$stmt->bindParam(':id', $userid);
+$stmt->execute();
+$account = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Check if the query returned any data
+if (!$account) {
+    die("No transactions found.");
+}
+
+// Display the user's ID
+echo $account['id_user'];
+?>
 <head>
 
 
@@ -24,11 +53,14 @@ include "sidebar.php"
         <div class="row m-0">
             <div class="col-md-7 col-12">
                 <div class="row">
+
                     <div class="col-12 mb-4">
                         <div class="row box-right">
                             <div class="col-md-8 ps-0 ">
                                 <p class="ps-3 textmuted fw-bold h6 mb-0">TOTAL CREDS</p>
-                                <p class="h1 fw-bold d-flex"> <span class=" fas fa-dollar-sign textmuted pe-1 h6 align-text-top mt-1"></span>100,000 <span class="textmuted">.00</span> </p>
+                                <p class="h1 fw-bold d-flex"> <span class=" fas fa-dollar-sign textmuted pe-1 h6 align-text-top mt-1"></span><?php
+                                    $account['id_user']
+                                    ?> <span class="textmuted">.00</span> </p>
                                 <p class="ms-3 px-2 bg-green">+10% since last month</p>
                             </div>
                             <div class="col-md-4">
@@ -58,7 +90,7 @@ include "sidebar.php"
                                             <strong>American Eagle</strong>
                                             <small>Clothes & Fashion</small>
                                         </h3>
-                                        <span>-39.99 USD</span>
+                                        <span></span>
                                     </div>
                                 </summary>
                                 <div>

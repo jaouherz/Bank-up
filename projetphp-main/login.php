@@ -24,12 +24,14 @@ if (isset($_POST['submit'])) {
 
         if ($user && password_verify($pass, $user['password'])) {
             $_SESSION['role'] = $user['nom_role'];
+            $_SESSION['email']=$user['Email'];
+            $_SESSION['id']=$user['User_id'];
             switch ($user['nom_role']) {
                 case 'admin':
                     header('Location: main.php');
                     exit;
                 case 'user':
-                    header('Location: client.php');
+                    header('Location: mybankaccount.php');
                     exit;
                 case 'agent':
                     header('Location: agent.php');
