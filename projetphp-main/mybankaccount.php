@@ -1,4 +1,3 @@
-
 <html>
 <?php
 session_start();
@@ -8,25 +7,35 @@ include 'config db.php'; // Assuming this file contains the database connection 
 if (!isset($_SESSION['id']) || empty($_SESSION['id'])) {
     header('Location: login.php');
 }
-global$db;
+
+global $db;
 $userid = $_SESSION['id'];
 
 // Fetch user data based on ID
 $stmt = $db->prepare("SELECT * FROM bank_account AS b
                       INNER JOIN transaction AS t
                       ON t.compte_sender = b.id_account OR b.id_account = t.compte_receiver
-                      WHERE id_user = :id");
+                      WHERE id_user = :id
+                      ORDER BY t.date desc ");
 $stmt->bindParam(':id', $userid);
 $stmt->execute();
-$account = $stmt->fetch(PDO::FETCH_ASSOC);
+$transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Check if the query returned any data
-if (!$account) {
+if (!$transactions) {
     die("No transactions found.");
 }
 
-// Display the user's ID
-echo $account['id_user'];
+
+
+
+$stmt = $db->prepare("SELECT * FROM bank_account WHERE id_user = :id");
+$stmt->bindParam(':id', $userid);
+$stmt->execute();
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$user) {
+    die("User not found.");
+}
 ?>
 <head>
 
@@ -59,8 +68,8 @@ include "sidebar.php"
                             <div class="col-md-8 ps-0 ">
                                 <p class="ps-3 textmuted fw-bold h6 mb-0">TOTAL CREDS</p>
                                 <p class="h1 fw-bold d-flex"> <span class=" fas fa-dollar-sign textmuted pe-1 h6 align-text-top mt-1"></span><?php
-                                    $account['id_user']
-                                    ?> <span class="textmuted">.00</span> </p>
+                                    echo $user['solde']
+                                    ?>  </p>
                                 <p class="ms-3 px-2 bg-green">+10% since last month</p>
                             </div>
                             <div class="col-md-4">
@@ -71,155 +80,93 @@ include "sidebar.php"
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 px-0 mb-4">
-                        <section>
-                            <h1>Latest Transactions</h1>
-                            <br>
-                            <details>
-                                <summary>
-                                    <div>
-				<span style="background-color: #f2dcbb;">
-					<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="currentColor" viewBox="0 0 256 256">
-						<rect width="256" height="256" fill="none"></rect>
-						<path d="M192,120h27.05573a8,8,0,0,0,7.15542-4.42229l18.40439-36.80878a8,8,0,0,0-3.18631-10.52366L192,40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>
-						<path d="M64,120H36.94427a8,8,0,0,1-7.15542-4.42229L11.38446,78.76893a8,8,0,0,1,3.18631-10.52366L64,40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>
-						<path d="M160,40a32,32,0,0,1-64,0H64V208a8,8,0,0,0,8,8H184a8,8,0,0,0,8-8V40Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>
-					</svg>
-				</span>
-                                        <h3>
-                                            <strong>American Eagle</strong>
-                                            <small>Clothes & Fashion</small>
-                                        </h3>
-                                        <span></span>
-                                    </div>
-                                </summary>
-                                <div>
-                                    <dl>
-                                        <div>
-                                            <dt>Time</dt>
-                                            <dd>4.27pm</dd>
-                                        </div>
 
-                                        <div>
-                                            <dt>Card used</dt>
-                                            <dd>•••• 6890</dd>
-                                        </div>
+                    <div class="row m-0">
+                        <div class="col-md-7 col-12">
+                            <div class="row">
 
-                                        <div>
-                                            <dt>Reference ID</dt>
-                                            <dd>3125-568911</dd>
-                                        </div>
-                                    </dl>
+                                <div class="col-12 px-0 mb-4">
+                                    <section>
+                                        <h1>Latest Transactions</h1>
+                                        <br>
+                                        <?php
+                                        foreach ($transactions as $transaction) {
+                                            ?>
+                                            <details>
+                                                <summary>
+                                                    <div>
+                                    <span style="background-color: #f2dcbb;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="currentColor" viewBox="0 0 256 256">
+                                            <rect width="256" height="256" fill="none"></rect>
+                                            <path d="M192,120h27.05573a8,8,0,0,0,7.15542-4.42229l18.40439-36.80878a8,8,0,0,0-3.18631-10.52366L192,40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>
+                                            <path d="M64,120H36.94427a8,8,0,0,1-7.15542-4.42229L11.38446,78.76893a8,8,0,0,1,3.18631-10.52366L64,40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>
+                                            <path d="M160,40a32,32,0,0,1-64,0H64V208a8,8,0,0,0,8,8H184a8,8,0,0,0,8-8V40Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>
+                                        </svg>
+                                    </span>
+                                                        <h3>
+                                                            <strong> <?php
+                                                                if ($transaction['compte_sender'] == $transaction['id_account']) {
+                                                                    $stmt2 = $db->prepare("SELECT * FROM user , bank_account WHERE id_user=User_id and id_account = :id");
+                                                                    $stmt2->bindParam(':id', $transaction['compte_receiver']);
+                                                                    if ($stmt2->execute()) {
+                                                                        $user2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+                                                                        if ($user2) {
+                                                                            echo $user2['Firstname'];
+                                                                        } else {
+                                                                            echo "User not found";
+                                                                        }
+                                                                    } else {
+                                                                        echo "Error executing query";
+                                                                    }
+                                                                } else {
+                                                                    $stmt2 = $db->prepare("SELECT * FROM user , bank_account WHERE id_user=User_id and id_account = :id");
+                                                                    $stmt2->bindParam(':id', $transaction['compte_sender']);
+                                                                    if ($stmt2->execute()) {
+                                                                        $user2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+                                                                        if ($user2) {
+                                                                            echo $user2['Firstname'];
+                                                                        } else {
+                                                                            echo "User not found";
+                                                                        }
+                                                                    } else {
+                                                                        echo "Error executing query";
+                                                                    }
+                                                                }
+                                                                ?></strong>
+                                                            <small><?php $transaction['date']  ?></small>
+                                                        </h3>
+                                                        <span><?php echo $transaction['montant']; ?></span>
+                                                    </div>
+                                                </summary>
+                                                <div>
+                                                    <dl>
+                                                        <div>
+                                                            <dt><?php echo $transaction['date']; ?></dt>
+                                                            <dd>4.27pm</dd>
+                                                        </div>
+                                                        <div>
+                                                            <dt>Card used</dt>
+                                                            <dd>•••• 6890</dd>
+                                                        </div>
+                                                        <div>
+                                                            <dt>Reference ID</dt>
+                                                            <dd>3125-568911</dd>
+                                                        </div>
+                                                    </dl>
+                                                </div>
+                                            </details>
+                                            <?php
+                                        }
+                                        ?>
+                                    </section>
                                 </div>
-                            </details>
-                            <details>
-                                <summary>
-                                    <div>
-				<span>
-					<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="currentColor" viewBox="0 0 256 256">
-						<rect width="256" height="256" fill="none"></rect>
-						<rect x="32" y="80" width="192" height="48" rx="7.99999" stroke-width="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none"></rect>
-						<path d="M208,128v72a8,8,0,0,1-8,8H56a8,8,0,0,1-8-8V128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>
-						<line x1="128" y1="80" x2="128" y2="208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
-						<path d="M173.25483,68.68629C161.94113,80,128,80,128,80s0-33.94113,11.31371-45.25483a24,24,0,0,1,33.94112,33.94112Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>
-						<path d="M82.74517,68.68629C94.05887,80,128,80,128,80s0-33.94113-11.31371-45.25483A24,24,0,0,0,82.74517,68.68629Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>
-					</svg>
-				</span>
-                                        <h3>
-                                            <strong>From Håvard Brynjulfsen</strong>
-                                            <small>Gift</small>
-                                        </h3>
-                                        <span class="plus">+50.00 USD</span>
-                                    </div>
-                                </summary>
-                                <div>
-                                    <dl>
-                                        <div>
-                                            <dt>Time</dt>
-                                            <dd>8.14am</dd>
-                                        </div>
 
-                                        <div>
-                                            <dt>Reference ID</dt>
-                                            <dd>3125-568912</dd>
-                                        </div>
-                                    </dl>
-                                </div>
-                            </details>
-                            <details>
-                                <summary>
-                                    <div>
-				<span style="background-color: #e0ece4;">
-					<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="#000000" viewBox="0 0 256 256">
-						<rect width="256" height="256" fill="none"></rect>
-						<line x1="88" y1="24" x2="88" y2="56" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
-						<line x1="120" y1="24" x2="120" y2="56" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
-						<line x1="152" y1="24" x2="152" y2="56" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
-						<line x1="32" y1="216" x2="208" y2="216" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
-						<path d="M83.29651,216.0038A88.01441,88.01441,0,0,1,32,136V88H208v48a88.0144,88.0144,0,0,1-51.29712,80.00408" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>
-						<path d="M208,88h0a32,32,0,0,1,32,32V128a32,32,0,0,1-32,32h-3.37846" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>
-					</svg>
-				</span>
-                                        <h3>
-                                            <strong>Starbucks</strong>
-                                            <small>Food & Beverage</small>
-                                        </h3>
-                                        <span>-14.99 USD</span>
-                                    </div>
-                                </summary>
-                                <div>
-                                    <dl>
-                                        <div>
-                                            <dt>Time</dt>
-                                            <dd>7.49am</dd>
-                                        </div>
-
-                                        <div>
-                                            <dt>Card used</dt>
-                                            <dd>•••• 6890</dd>
-                                        </div>
-
-                                        <div>
-                                            <dt>Reference ID</dt>
-                                            <dd>3125-568913</dd>
-                                        </div>
-                                    </dl>
-                                </div>
-                            </details>
-                            <details>
-                                <summary>
-                                    <div>
-				<span>
-<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="#000000" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><circle cx="128" cy="128" r="96" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></circle><g><path d="M179.1333,108.32931a112.19069,112.19069,0,0,0-102.3584.04859" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M164.29541,136.71457a79.94058,79.94058,0,0,0-72.68359.04736" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M149.47217,165.07248a47.97816,47.97816,0,0,0-43.03662.04736" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path></g></svg>
-				</span>
-                                        <h3>
-                                            <strong>Spotify</strong>
-                                            <small>Music & Entertainment</small>
-                                        </h3>
-                                        <span>-9.99 USD</span>
-                                    </div>
-                                </summary>
-                                <div>
-                                    <dl>
-                                        <div>
-                                            <dt>Time</dt>
-                                            <dd>1.00am</dd>
-                                        </div>
-
-                                        <div>
-                                            <dt>Card used</dt>
-                                            <dd>•••• 6890</dd>
-                                        </div>
-
-                                        <div>
-                                            <dt>Reference ID</dt>
-                                            <dd>3125-568915</dd>
-                                        </div>
-                                    </dl>
-                                </div>
-                            </details>
-                        </section>
+                            </div>
+                        </div>
                     </div>
+
+
+
                     <div class="col-12 px-0 ">
                         <div class="box-right">
                             <div class="d-flex pb-2">
