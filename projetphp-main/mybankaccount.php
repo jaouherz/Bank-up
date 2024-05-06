@@ -81,9 +81,6 @@ include "sidebar.php"
                         </div>
                     </div>
 
-                    <div class="row m-0">
-                        <div class="col-md-7 col-12">
-                            <div class="row">
 
                                 <div class="col-12 px-0 mb-4">
                                     <section>
@@ -161,9 +158,7 @@ include "sidebar.php"
                                     </section>
                                 </div>
 
-                            </div>
-                        </div>
-                    </div>
+
 
 
 
