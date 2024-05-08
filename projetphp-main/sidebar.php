@@ -17,69 +17,64 @@
                 <img src="$RRTVBNQ.png" style="margin-left: -27px">
             </div>
             <li >
-                <a>
+                <a href="mybankaccount.php">
                     <i class="fa fa-line-chart fa-2x"></i>
                     <span class="nav-text">
-                          consulter mes transaction
-                        </span>
+                          View my transactions
+                    </span>
                 </a>
-
             </li>
             <li >
-                <a>
-                    <i class="fa fa-handshake-angle fa-2x" ></i>
+                <a href="maketransaction.php">
+
+                <i class="fa fa-handshake-angle fa-2x" ></i>
                     <span class="nav-text">
-                            Faire une transaction
+                            Make a transaction
                         </span>
 
+                </a>
+            </li>
+            <li>
+                <a href="demande.php">
+
+                    <i class="fa fa-plus fa-2x"></i>
+                    <span class="nav-text"  >
+                            Add request
+                        </span>
                 </a>
             </li>
             <li class="has-subnav" >
                 <a>
                     <i class="fa fa-calendar fa-2x"></i>
                     <span class="nav-text">
-                            mes demandes
+                            My requests
                         </span>
                 </a>
 
             </li>
 
             <li >
-                <a>
+                <a href="Profile.php">
                     <i class="fa fa-calendar-days fa-2x"></i>
                     <span class="nav-text">
-                            mon profile
+                            My profile
                         </span>
                 </a>
 
 
             <li >
-                <a>
-                    <i class="fa fa-list fa-2x"  ></i>
+                <a href="main.php">
+
+                <i class="fa fa-list fa-2x"  ></i>
                     <span class="nav-text" >
-                            Mes Projets
-                        </span>
-
-                </a>
-            </li>
-            <li >
-                <a>
-                    <i class="fa fa-list-ul fa-2x"  ></span></i>
-                    <span class="nav-text" >
-                             Projets et Séances
+                            Users management
                         </span>
 
                 </a>
             </li>
 
-            <li *ngIf="isrecette" class="has-subnav" routerLink="/project">
-                <a>
-                    <i class="fa fa-plus fa-2x"></i>
-                    <span class="nav-text"  >
-                            Ajouter un projet
-                        </span>
-                </a>
-            </li>
+
+
         </ul>
 
 
