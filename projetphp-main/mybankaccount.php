@@ -10,7 +10,8 @@ if (!isset($_SESSION['id']) || empty($_SESSION['id'])) {
 
 global $db;
 $userid = $_SESSION['id'];
-
+$totalReceived = 0;
+$totalSent = 0;
 // Fetch user data based on ID
 $stmt = $db->prepare("SELECT * FROM bank_account AS b
                       INNER JOIN transaction AS t
@@ -36,6 +37,12 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 if (!$user) {
     die("User not found.");
 }
+foreach ($transactions as $transaction) {
+if ($transaction['compte_sender'] == $user['id_account']) {
+    $totalSent += $transaction['montant'];
+} else {
+    $totalReceived += $transaction['montant'];
+}}
 ?>
 <head>
 
@@ -67,16 +74,16 @@ include "sidebar.php"
                         <div class="row box-right">
                             <div class="col-md-8 ps-0 ">
                                 <p class="ps-3 textmuted fw-bold h6 mb-0">TOTAL CREDS</p>
-                                <p class="h1 fw-bold d-flex"> <span class=" fas fa-dollar-sign textmuted pe-1 h6 align-text-top mt-1"></span><?php
+                                <p class="h1 fw-bold d-flex"> <?php
                                     echo $user['solde']
-                                    ?>  </p>
+                                    ?> <span class="  textmuted pe-1 h6 align-text-top mt-1"> DT</span> </p>
                                 <p class="ms-3 px-2 bg-green">+10% since last month</p>
                             </div>
                             <div class="col-md-4">
                                 <p class="p-blue"> <span class="fas fa-circle pe-2"></span>RECIEVED </p>
-                                <p class="fw-bold mb-3"><span class="fas fa-dollar-sign pe-1"></span>1254 <span class="textmuted">.50</span> </p>
+                                <p class="fw-bold mb-3"><span class="fas fa-dollar-sign pe-1"></span><?php echo $totalReceived?> <span class="textmuted">.50</span> </p>
                                 <p class="p-org"><span class="fas fa-circle pe-2"></span>SEND</p>
-                                <p class="fw-bold"><span class="fas fa-dollar-sign pe-1"></span>20<span class="textmuted">.00</span></p>
+                                <p class="fw-bold"><span class="fas fa-dollar-sign pe-1"></span><?php echo $totalSent?><span class="textmuted">.00</span></p>
                             </div>
                         </div>
                     </div>
@@ -88,18 +95,12 @@ include "sidebar.php"
                                         <br>
                                         <?php
                                         foreach ($transactions as $transaction) {
+
                                             ?>
                                             <details>
                                                 <summary>
                                                     <div>
-                                    <span style="background-color: #f2dcbb;">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="currentColor" viewBox="0 0 256 256">
-                                            <rect width="256" height="256" fill="none"></rect>
-                                            <path d="M192,120h27.05573a8,8,0,0,0,7.15542-4.42229l18.40439-36.80878a8,8,0,0,0-3.18631-10.52366L192,40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>
-                                            <path d="M64,120H36.94427a8,8,0,0,1-7.15542-4.42229L11.38446,78.76893a8,8,0,0,1,3.18631-10.52366L64,40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>
-                                            <path d="M160,40a32,32,0,0,1-64,0H64V208a8,8,0,0,0,8,8H184a8,8,0,0,0,8-8V40Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>
-                                        </svg>
-                                    </span>
+
                                                         <h3>
                                                             <strong> <?php
                                                                 if ($transaction['compte_sender'] == $transaction['id_account']) {
@@ -108,6 +109,11 @@ include "sidebar.php"
                                                                     if ($stmt2->execute()) {
                                                                         $user2 = $stmt2->fetch(PDO::FETCH_ASSOC);
                                                                         if ($user2) {
+                                                                            ?>
+                                                                            <span style="background-color: white;">
+                                       <i class="fa-solid fa-arrow-up"></i>
+                                    </span>
+                                                                            <?php
                                                                             echo $user2['Firstname'];
                                                                         } else {
                                                                             echo "User not found";
@@ -121,8 +127,22 @@ include "sidebar.php"
                                                                     if ($stmt2->execute()) {
                                                                         $user2 = $stmt2->fetch(PDO::FETCH_ASSOC);
                                                                         if ($user2) {
+                                                                            ?>
+                                                                            <span >
+                                       <i class="fa-solid fa-arrow-down"></i>
+                                    </span>
+
+
+                                                                            <?php
                                                                             echo $user2['Firstname'];
-                                                                        } else {
+                                                                         ?>
+
+
+
+
+
+
+                                                                        <?php } else {
                                                                             echo "User not found";
                                                                         }
                                                                     } else {

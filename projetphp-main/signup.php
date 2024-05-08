@@ -4,18 +4,18 @@ include 'config db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
     $name = $_POST['name'];
-    $lastname = $_POST['lastname']; // Récupération du champ Last Name
+    $lastname = $_POST['lastname'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $numtel = $_POST['numtel'];
     $date_naissance = $_POST['date_naissance'];
     $adress = $_POST['adress'];
-    $id_role = $_POST['role']; // Assuming the role value is passed as a POST parameter
+    $id_role = $_POST['role'];
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     $stmt = $db->prepare("INSERT INTO user (Firstname, Lastname, Email, password, Numtel, Date_N, Adresse, id_role) VALUES (:name, :lastname, :email, :password, :numtel, :date_naissance, :adress, :id_role)");
     $stmt->bindParam(':name', $name);
-    $stmt->bindParam(':lastname', $lastname); // Liaison du champ Last Name
+    $stmt->bindParam(':lastname', $lastname);
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':password', $hashed_password);
     $stmt->bindParam(':numtel', $numtel);
