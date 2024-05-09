@@ -58,14 +58,7 @@ include "sidebar.php"
 ?>
 
     <div class="container">
-        <div class="col-12 px-0 mb-4 ">
-            <div class="pagetitle">
-                <h1>
-                    Transaction Ledger: Tracking Your Financial Movements
-                </h1>
-                <br>
-            </div>
-        </div>
+
         <div class="row m-0">
             <div class="col-md-7 col-12">
                 <div class="row">

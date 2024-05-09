@@ -17,8 +17,16 @@
                 <img src="$RRTVBNQ.png" style="margin-left: -27px">
             </div>
             <li >
+                <a href="Profile.php">
+                    <i class="fa fa-solid fa-user" href="Profile.php"></i>
+                    <span class="nav-text">
+                            My profile
+                        </span>
+                </a>
+            </li>
+            <li >
                 <a href="mybankaccount.php">
-                    <i class="fa fa-line-chart fa-2x"></i>
+                    <i class="fa fa-solid fa-arrow-right-arrow-left"></i>
                     <span class="nav-text">
                           View my transactions
                     </span>
@@ -27,7 +35,7 @@
             <li >
                 <a href="maketransaction.php">
 
-                <i class="fa fa-handshake-angle fa-2x" ></i>
+                    <i class="fa fa-solid fa-circle-dollar-to-slot"></i>
                     <span class="nav-text">
                             Make a transaction
                         </span>
@@ -37,7 +45,8 @@
             <li>
                 <a href="demande.php">
 
-                    <i class="fa fa-plus fa-2x"></i>
+                    <i class="fa fa-solid fa-hand-point-up"></i>
+
                     <span class="nav-text"  >
                             Add request
                         </span>
@@ -45,21 +54,13 @@
             </li>
             <li class="has-subnav" >
                 <a>
-                    <i class="fa fa-calendar fa-2x"></i>
-                    <span class="nav-text">
+                    <i class=" fa fa-solid fa-comment-dots"></i>                    <span class="nav-text">
                             My requests
                         </span>
                 </a>
 
             </li>
 
-            <li >
-                <a href="Profile.php">
-                    <i class="fa fa-calendar-days fa-2x"></i>
-                    <span class="nav-text">
-                            My profile
-                        </span>
-                </a>
 
 
             <li >
