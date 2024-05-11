@@ -1,9 +1,8 @@
 <html>
 <?php
 session_start();
-include 'config db.php'; // Assuming this file contains the database connection code
+include 'config db.php';
 
-// Check if the user is logged in
 if (!isset($_SESSION['id']) || empty($_SESSION['id'])) {
     header('Location: login.php');
 }
@@ -95,19 +94,18 @@ include "sidebar.php"
                                                     <div>
 
                                                         <h3>
-                                                            <strong> <?php
+                                                            <strong > <?php
                                                                 if ($transaction['compte_sender'] == $transaction['id_account']) {
                                                                     $stmt2 = $db->prepare("SELECT * FROM user , bank_account WHERE id_user=User_id and id_account = :id");
                                                                     $stmt2->bindParam(':id', $transaction['compte_receiver']);
                                                                     if ($stmt2->execute()) {
                                                                         $user2 = $stmt2->fetch(PDO::FETCH_ASSOC);
                                                                         if ($user2) {
-                                                                            ?>
-                                                                            <span style="background-color: white;">
-                                       <i class="fa-solid fa-arrow-up"></i>
-                                    </span>
+                                                                            ?><div style="color: red;">
+                                                                            <i class="fa-solid fa-arrow-up" style="margin-right: 5px;"></i>
+                                                                            <?php echo $user2['Firstname'] . ' ' . $user2['Lastname']; ?>
+                                                                            </div>
                                                                             <?php
-                                                                            echo $user2['Firstname'];
                                                                         } else {
                                                                             echo "User not found";
                                                                         }
@@ -120,21 +118,10 @@ include "sidebar.php"
                                                                     if ($stmt2->execute()) {
                                                                         $user2 = $stmt2->fetch(PDO::FETCH_ASSOC);
                                                                         if ($user2) {
-                                                                            ?>
-                                                                            <span >
-                                       <i class="fa-solid fa-arrow-down"></i>
-                                    </span>
-
-
-                                                                            <?php
-                                                                            echo $user2['Firstname'];
-                                                                         ?>
-
-
-
-
-
-
+                                                                            ?><div style="color: #1e7e34;">
+                                                                            <i class="fa-solid fa-arrow-down" style="margin-right: 5px;"></i>
+                                                                            <?php echo $user2['Firstname'] . ' ' . $user2['Lastname']; ?>
+                                                                            </div>
                                                                         <?php } else {
                                                                             echo "User not found";
                                                                         }
@@ -145,7 +132,7 @@ include "sidebar.php"
                                                                 ?></strong>
                                                             <small><?php $transaction['date']  ?></small>
                                                         </h3>
-                                                        <span><?php echo $transaction['montant']; ?></span>
+                                                        <span><?php echo ($transaction['compte_sender'] == $user['id_account']) ? '-' : '+'; ?><?php echo $transaction['montant']; ?></span>
                                                     </div>
                                                 </summary>
                                                 <div>
@@ -175,19 +162,6 @@ include "sidebar.php"
 
 
 
-                    <div class="col-12 px-0 ">
-                        <div class="box-right">
-                            <div class="d-flex pb-2">
-                                <p class="fw-bold h7"><span class="textmuted">quickpay.to/</span>Publicnote</p>
-                                <p class="ms-auto p-blue"><span class=" bg btn btn-primary fas fa-pencil-alt me-3"></span> <span class=" bg btn btn-primary far fa-clone"></span> </p>
-                            </div>
-                            <div class="bg-blue p-2">
-                                <P class="h8 textmuted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum recusandae dolorem voluptas nemo, modi eos minus nesciunt.
-                                <p class="p-blue bg btn btn-primary h8">LEARN MORE</p>
-                                </P>
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
             </div>

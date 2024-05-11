@@ -13,7 +13,7 @@
     <nav class="main-menu" >
         <ul>
             <div class="logo">
-                <img src="$RHR3ED6.png" alt="Logo">
+                <img href="index.html" src="$RHR3ED6.png" alt="Logo">
                 <img src="$RRTVBNQ.png" style="margin-left: -27px">
             </div>
             <li >
