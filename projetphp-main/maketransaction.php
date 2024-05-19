@@ -1,5 +1,7 @@
 <?php
-session_start();
+if(session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
 ob_start();
 include 'config db.php';
 include 'sidebar.php';

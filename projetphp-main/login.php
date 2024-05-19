@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
                     header('Location: mybankaccount.php');
                     exit;
                 case 'agent':
-                    header('Location: agent.php');
+                    header('Location: agentpagemain.php');
                     exit;
                 default:
                     header('Location: index.html');
