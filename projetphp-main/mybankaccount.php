@@ -1,6 +1,8 @@
 <html>
 <?php
-session_start();
+if(session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
 include 'config db.php';
 
 if (!isset($_SESSION['id']) || empty($_SESSION['id'])) {

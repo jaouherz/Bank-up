@@ -4,7 +4,7 @@
 global$db;
 include 'config db.php';
 
-
+if ($_SESSION['role']== 'admin') {
 
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -20,7 +20,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
     echo "User deleted successfully.";
     exit;
 }
-
+} else {
+    header('Location: error.php');
+    exit;
+}
 
 ?>
 

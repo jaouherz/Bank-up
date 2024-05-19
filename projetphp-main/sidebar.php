@@ -1,3 +1,14 @@
+<?php
+
+if(session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
+    $role = $_SESSION['role'];
+
+}
+
+?>
 <html>
 <head>
 
@@ -16,65 +27,76 @@
                 <img href="index.html" src="$RHR3ED6.png" alt="Logo">
                 <img src="$RRTVBNQ.png" style="margin-left: -27px">
             </div>
-            <li >
-                <a href="Profile.php">
-                    <i class="fa fa-solid fa-user" href="Profile.php"></i>
-                    <span class="nav-text">
-                            My profile
+            <?php if ($role === 'user') { ?>
+                <li >
+                    <a href="Profile.php">
+                        <i class="fa fa-solid fa-user" href="Profile.php"></i>
+                        <span class="nav-text">
+                                My profile
+                            </span>
+                    </a>
+                </li>
+                <li >
+                    <a href="mybankaccount.php">
+                        <i class="fa fa-solid fa-arrow-right-arrow-left"></i>
+                        <span class="nav-text">
+                              View my transactions
                         </span>
-                </a>
-            </li>
-            <li >
-                <a href="mybankaccount.php">
-                    <i class="fa fa-solid fa-arrow-right-arrow-left"></i>
-                    <span class="nav-text">
-                          View my transactions
-                    </span>
-                </a>
-            </li>
-            <li >
-                <a href="maketransaction.php">
+                    </a>
+                </li>
+                <li >
+                    <a href="maketransaction.php">
 
-                    <i class="fa fa-solid fa-circle-dollar-to-slot"></i>
-                    <span class="nav-text">
-                            Make a transaction
-                        </span>
+                        <i class="fa fa-solid fa-circle-dollar-to-slot"></i>
+                        <span class="nav-text">
+                                Make a transaction
+                            </span>
 
-                </a>
-            </li>
-            <li>
-                <a href="demande.php">
+                    </a>
+                </li>
+                <li>
+                    <a href="demande.php">
 
-                    <i class="fa fa-solid fa-hand-point-up"></i>
+                        <i class="fa fa-solid fa-hand-point-up"></i>
 
-                    <span class="nav-text"  >
-                            Add request
-                        </span>
-                </a>
-            </li>
-            <li class="has-subnav" >
-                <a>
-                    <i class=" fa fa-solid fa-comment-dots"></i>                    <span class="nav-text">
-                            My requests
-                        </span>
-                </a>
+                        <span class="nav-text"  >
+                                Add request
+                            </span>
+                    </a>
+                </li>
+                <li class="has-subnav" >
+                    <a>
+                        <i class=" fa fa-solid fa-comment-dots"></i>                    <span class="nav-text">
+                                My requests
+                            </span>
+                    </a>
 
-            </li>
+                </li>
+            <?php } ?>
+            <?php  if ($role === 'agent') {
+                echo' <li >
+                    <a href="agentpagemain.php">
 
+                    <i class="fa fa-list fa-2x"  ></i>
+                        <span class="nav-text" >
+                                Users management
+                            </span>
 
+                    </a>
+                </li>';
+            } ?>
+            <?php  if ($role === 'admin') {
+                echo' <li >
+                    <a href="main.php">
 
-            <li >
-                <a href="main.php">
+                    <i class="fa fa-list fa-2x"  ></i>
+                        <span class="nav-text" >
+                                agents management
+                            </span>
 
-                <i class="fa fa-list fa-2x"  ></i>
-                    <span class="nav-text" >
-                            Users management
-                        </span>
-
-                </a>
-            </li>
-
-
+                    </a>
+                </li>';
+            } ?>
 
         </ul>
 
