@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-    $stmt = $db->prepare("SELECT password FROM user WHERE User_id = :id");
+    $stmt = $db->prepare("SELECT password,Firstname,Lastname FROM user WHERE User_id = :id");
     $stmt->bindParam(':id', $userid);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -74,10 +74,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }else{
 
-    $stmt = $db->prepare("UPDATE bank_account SET solde = solde - :amount WHERE id_user = :id");
-    $stmt->bindParam(':id', $userid);
-    $stmt->bindParam(':amount', $amount);
-    $stmt->execute();
+            $stmt = $db->prepare("UPDATE bank_account SET solde = solde - :amount WHERE id_user = :id");
+            $stmt->bindParam(':id', $userid);
+            $stmt->bindParam(':amount', $amount);
+            $stmt->execute();
 
 
             $stmt = $db->prepare("UPDATE bank_account SET solde = solde + :amount WHERE id_account = :id");
@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(['success' => "Transaction successfully added."]);
                 exit;
             }
-}}
+        }}
 
 }
 ?>
@@ -118,11 +118,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="mainpage.css"></head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
     <style>
         .ui-autocomplete {
             position: absolute;
@@ -132,78 +134,104 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             max-height: 150px;
             overflow-y: auto;
             overflow-x: hidden;
+            cursor: pointer;
         }
-    </style>
-    <meta charset="UTF-8">
-    <title>Make Transaction</title>
-</head>
-<body>
-<div class="container-fluid d-flex">
-    <div class="flex-grow-1">
-        <div class="d-flex align-items-center justify-content-end mb-4">
-            <span>Your Solde: <?php echo $bank_account['solde'] ?></span>
-            <i class="bx bx-search me-2"></i>
-        </div>
 
-        <div class="container" id="main-container" style="margin-top:100px;margin-left:-70px;">
-            <div class="row gutters-sm">
-                <div class="col-md-4 mb-3"></div>
-                <div class="col-xl-8">
-                    <div class="card mb-4">
-                        <div class="card-header py-3" style="background-color:rgb(44, 134, 243);">
-                            <h6 style="color:white;font-size: 17px;margin-left:280px;">Make a Transaction</h6>
+    </style>
+<meta charset="UTF-8">
+<title>Make Transaction</title>
+</head>
+<div>
+    <?php
+    include "sidebar.php"
+    ?>
+    <div class="container">
+        <div class="col-12 px-0 mb-4 ">
+            <div class="pagetitle">
+                <h1>
+                    Create your transaction
+                </h1>
+                <br>
+            </div>
+        </div>
+        <div class="col-12 px-0 mb-4">
+            <div class="container-box">
+                <div class="container-fluid d-flex">
+                    <div class="flex-grow-1">
+                        <div class="row box-right">
+                            <div class="col-md ps-0 " style="display:inline-flex;" >
+                                <h1>Your solde is :</h1>
+                                <p class="h1 fw-bold d-flex" style="color: green"> <?php
+                                    echo $bank_account['solde']
+                                    ?> <span class="  textmuted pe-1 h6 align-text-top mt-1"> DT</span> </p>
+                            </div >
+                            <div class="col-md ps-0 " style="display:inline-flex;" >
+                                <h1>Your ceiling is :</h1>
+                                <p class="h1 fw-bold d-flex" style="color: red"> -<?php
+                                    echo $bank_account['plafond_r']
+                                    ?> <span class="  textmuted pe-1 h6 align-text-top mt-1"> DT</span> </p>
+                            </div >
                         </div>
-                        <div class="card-body">
-                            <form method="POST">
-                                <div class="row gx-3 mb-3">
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="receiver">Receiver<span style="color: #D72A12">*</span></label>
-                                        <input class="form-control" id="receiver" type="text" name="receiver">
+
+                        <div id="main-container" >
+                            <div class="col-xl-8" style="width: auto;">
+                                <div class="card mb-4">
+                                    <div class="card-header py-3" style="background-color:rgb(44, 134, 243); ">
+                                        <h6 style="color:white;font-size: 17px;margin-left: 44%;">Make a Transaction</h6>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="amount">Amount<span style="color: #D72A12">*</span></label>
-                                        <input class="form-control" id="amount" type="text" name="amount">
+                                    <div class="card-body">
+                                        <form method="POST">
+                                            <div class="row gx-3 mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1" for="receiver">Receiver<span style="color: #D72A12">*</span></label>
+                                                    <input class="form-control" id="receiver" type="text" name="receiver">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1" for="amount">Amount<span style="color: #D72A12">*</span></label>
+                                                    <input class="form-control" id="amount" type="text" name="amount">
+                                                </div>
+                                                <button type="submit" class="btn btn-primary" style="text-align:center;width:250px; margin-left: 40%;margin-top:15px;">Make Transaction</button>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <button type="submit" class="btn btn-primary" style="text-align:center;width:250px; margin-left: 230px;margin-top:15px;">Make Transaction</button>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="messageModalLabel">Message</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="messageModalBody">
-                <!-- Message will be inserted here -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="passwordModalLabel">Confirm Password</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <input type="password" id="passwordInput" class="form-control" placeholder="Enter your password">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="confirmPasswordButton">Confirm</button>
+                <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="    margin-top: 13%;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="messageModalLabel">Message</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="messageModalBody">
+                                <!-- Message will be inserted here -->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="    margin-top: 13%;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="passwordModalLabel">Confirm Password</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="password" id="passwordInput" class="form-control" placeholder="Enter your password">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" id="confirmPasswordButton">Confirm</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

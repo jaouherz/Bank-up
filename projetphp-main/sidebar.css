@@ -10,7 +10,7 @@ body{
     background-color:#e8eaf6;
 }
 .box {
-    display: flex;
+    display: grid;
 }
 
 .fa-2x {
