@@ -64,6 +64,26 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                             </span>
                     </a>
                 </li>
+                <li>
+                    <a href="agentLists.php">
+
+                        <i class="fa fa-solid fa-user-tie"></i>
+
+                        <span class="nav-text"  >
+                                Agent list
+                            </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="addAgent.php">
+
+                        <i class="fa fa-solid fa-user-plus"  style="margin-left: 3px;"></i>
+
+                        <span class="nav-text"  >
+                                 Add Agent
+                            </span>
+                    </a>
+                </li>
                 <li class="has-subnav" >
                     <a>
                         <i class=" fa fa-solid fa-comment-dots"></i>                    <span class="nav-text">
