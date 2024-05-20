@@ -190,8 +190,8 @@ include "sidebar.php"
                                 <label for="message">Message:</label>
                                 <textarea id="message" name="message" rows="5" required></textarea>
                             </div>
-                            <button class="button-49" role="button" type="submit">Send Request</button>
-                        </form>
+                            <button type="submit" class="btn btn-primary" style="text-align:center;width:250px; margin-left: 230px;margin-top:15px;
+" >Request</button>                        </form>
                     </div>
 
                 </section>

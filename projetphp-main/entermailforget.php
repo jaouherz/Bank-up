@@ -54,7 +54,7 @@ if (isset($_POST['submit'])) {
 
 
 
-?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -101,6 +101,16 @@ if (isset($_POST['submit'])) {
 
 </head>
 
+<style>
+    #header.header-inner-pages {
+        background: rgba(0, 125, 254, 255);
+        padding: 12px 0;
+    }
+    section {
+        margin-top:70px;
+    }
+
+</style>
 <body>
 
 <!-- ======= Header ======= -->
@@ -116,8 +126,6 @@ if (isset($_POST['submit'])) {
                 <li><a class="nav-link scrollto" href="about.html">About</a></li>
                 <li><a class="nav-link scrollto " href="terms.html">Terms and Condition</a></li>
                 <li><a class="nav-link scrollto" href="contact.php">Contact</a></li>
-                <li><a class="nav-link scrollto" href="signup.html">Sign Up</a></li>
-                <li><a class="nav-link scrollto" href="login.html">Login</a></li>
 
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
@@ -125,7 +133,6 @@ if (isset($_POST['submit'])) {
 
     </div>
 </header><!-- End Header -->
-
 <main id="main">
     <section class="inner-page" >
         <div class="container">
@@ -153,50 +160,6 @@ if (isset($_POST['submit'])) {
 </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
-<footer id="footer">
-
-    <div class="footer-top">
-        <div class="container2">
-            <div class="row">
-
-                <div class="col-lg-3 col-md-6 footer-contact">
-                    <h3> Bank-up</h3>
-
-                </div>
-
-                <div class="col-lg-2 col-md-6 footer-links">
-
-                </div>
-
-                <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Our Services</h4>
-
-                </div>
-
-                <div class="col-lg-4 col-md-6 footer-newsletter">
-
-
-                    <h1 class="text-center mt-2">SKY BANK</h1>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-
-        <div class="copyright-wrap d-md-flex py-4">
-            <div class="me-md-auto text-center text-md-start">
-                <div class="copyright">
-                    &copy; Copyright <strong><span>Bank-up</span></strong>. All Rights Reserved
-                </div>
-                <div class="credits">
-                </div>
-
-            </div>
-
-        </div>
-</footer>
 
 
 

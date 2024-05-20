@@ -69,9 +69,9 @@ include "sidebar.php"
                     <div class="col-12 mb-4" ">
                         <div class="row box-right">
                             <div class="col-md ps-0">
-                                <h1> <?php echo $user['Lastname'] ?></h1>
-                                <h1> <?php echo $user['Firstname'] ?> </h1>
-                                <h2>Account's id: <b> <?php echo $user['id_account'] ?> </b> </h2>
+                                <strong ><h1></strong><?php echo $user['Lastname'].
+                                 ' '. $user['Firstname'] ?> </h1></strong>
+                                <h6>Account's id: <b> <?php echo $user['id_account'] ?> </b> </h6>
                             </div>
                             <div class="col-md ps-0  " style="    margin-top: 30px;margin-left: 50px;">
                                 <p class="ps-3 textmuted fw-bold h6 mb-0">TOTAL CREDS</p>
@@ -154,7 +154,6 @@ include "sidebar.php"
                                                     <dl>
                                                         <div>
                                                             <dt><?php echo $transaction['date']; ?></dt>
-                                                            <dd>4.27pm</dd>
                                                         </div>
                                                         <div>
                                                             <dt>Card used</dt>
@@ -162,7 +161,7 @@ include "sidebar.php"
                                                         </div>
                                                         <div>
                                                             <dt>Reference ID</dt>
-                                                            <dd>3125-568911</dd>
+                                                            <?php echo $transaction['id_transaction']; ?>
                                                         </div>
                                                     </dl>
                                                 </div>

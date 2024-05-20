@@ -64,26 +64,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                             </span>
                     </a>
                 </li>
-                <li>
-                    <a href="agentLists.php">
 
-                        <i class="fa fa-solid fa-user-tie"></i>
 
-                        <span class="nav-text"  >
-                                Agent list
-                            </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="addAgent.php">
 
-                        <i class="fa fa-solid fa-user-plus"  style="margin-left: 3px;"></i>
-
-                        <span class="nav-text"  >
-                                 Add Agent
-                            </span>
-                    </a>
-                </li>
                 <li class="has-subnav" >
                     <a>
                         <i class=" fa fa-solid fa-comment-dots"></i>                    <span class="nav-text">
@@ -105,19 +88,48 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                     </a>
                 </li>';
             } ?>
-            <?php  if ($role === 'admin') {
+            <?php  if ($role === 'agent') {
                 echo' <li >
-                    <a href="main.php">
+                    <a href="makedeposit.php">
 
-                    <i class="fa fa-list fa-2x"  ></i>
+                    <i class="fa fa-dollar fa-2x"  ></i>
                         <span class="nav-text" >
-                                agents management
+                                Deposser de l"argent
                             </span>
 
                     </a>
                 </li>';
             } ?>
+            <?php  if ($role === 'admin') {
+                echo' <li >
+                    <a href="main.php">
+                    <i class="fa  fa-user-tie"></i>
+                        <span class="nav-text" >
+                                Agents management
+                            </span>
 
+                    </a>
+                </li>';
+                echo' <li >
+                    <a href="addAgent.php">
+
+                        <i class="fa  fa-user-plus"></i>
+                        <span class="nav-text" >
+                        Add agent    </span>
+
+                    </a>
+                </li>';
+            } ?>
+            <li >
+                <a href="login.php">
+
+                    <i class="fa fa-power-off fa-2x"  ></i>
+                    <span class="nav-text" >
+                               Logout
+                            </span>
+
+                </a>
+            </li>
         </ul>
 
 

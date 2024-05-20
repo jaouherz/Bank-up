@@ -44,7 +44,6 @@ include "sidebar.php"
                             <input type="text" half placeholder="address" name="adress" autocomplete="no" required>
                             <select name="role">
                                 <option value="agent">agent</option>
-                                <option value="admin">admin</option>
                             </select>
                             <input type="submit" value="Register">
                         </form>

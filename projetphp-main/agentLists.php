@@ -1,10 +1,12 @@
 <?php
-
+if(session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
 
 global$db;
 include 'config db.php';
 
-//if ($_SESSION['role']== 'admin') {
+if ($_SESSION['role']== 'admin') {
 
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -20,10 +22,10 @@ include 'config db.php';
         echo "User deleted successfully.";
         exit;
     }
-//} else {
-//    header('Location: error.php');
-//    exit;
-//}
+} else {
+   header('Location: error.php');
+    exit;
+}
 
 ?>
 

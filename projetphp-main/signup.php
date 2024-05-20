@@ -1,12 +1,17 @@
 <?php
 global $db;
 include 'config db.php';
-
+include "sidebar.php";
+require 'D:\xamp\htdocs\vendor\phpmailer\phpmailer\src\Exception.php';
+require 'D:\xamp\htdocs\vendor\phpmailer\phpmailer\src\PHPMailer.php';
+require 'D:\xamp\htdocs\vendor\phpmailer\phpmailer\src\SMTP.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
     $name = $_POST['name'];
     $lastname = $_POST['lastname'];
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $password = $_POST['email'];
     $numtel = $_POST['numtel'];
     $date_naissance = $_POST['date_naissance'];
     $adress = $_POST['adress'];
@@ -24,13 +29,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
     $stmt->bindParam(':id_role', $id_role);
 
     $stmt->execute();
+    $mail = new PHPMailer(true);
+
     if ($stmt) {
-        echo '<div id="myModal" class="modal">
+        try {
+            $mail->isSMTP();
+            $mail->Host       = 'smtp.gmail.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'jaouher3009@gmail.com';
+            $mail->Password   = 'degf ozkq sqvv eydt';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = 587;
+
+            //Recipients
+            $mail->setFrom('your-email@example.com', 'BANK-UP');
+            $mail->addAddress($email);
+
+            //Content
+            $mail->isHTML(true);
+            $mail->Subject = 'Welcome to BANK-UP';
+            $mail->Body    = "you curent password is your email adress you can login then changing you password ";
+
+            $mail->send();
+            echo '<div id="myModal" class="modal">
                 <div class="modal-content">
                     <span class="close">&times;</span>
-                    <p>Form submitted successfully!</p>
+                    <p>Form submission failed!</p>
                 </div>
             </div>';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
     } else {
         echo '<div id="myModal" class="modal">
                 <div class="modal-content">
@@ -95,42 +124,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
 </style>
 <body>
 
-<!-- ======= Header ======= -->
-<header id="header" class="fixed-top header-inner-pages">
-    <div class="container d-flex align-items-center justify-content-between">
-        <h1 class="logo"><a href="../SkyBank/">BANK-UP</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-        <nav id="navbar" class="navbar">
-            <ul>
-                <li><a class="nav-link scrollto " href="index.html">Home</a></li>
-                <li><a class="nav-link scrollto" href="about.php">About</a></li>
-                <li><a class="nav-link scrollto " href="terms.html">Terms and Condition</a></li>
-                <li><a class="nav-link scrollto" href="contact.html">Contact</a></li>
+<header >
 
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
 
-    </div>
-</header><!-- End Header -->
+
+</header>
 
 <main id="main">
 
-    <!-- ======= Breadcrumbs ======= -->
-    <section class="breadcrumbs" >
-        <div class="container">
 
-            <div class="d-flex justify-content-between align-items-center">
-                <ol>
-                    <li><a href="index.html">Home</a></li>
-                    <li>Add User</li>
-                </ol>
-            </div>
 
-        </div>
-    </section><!-- End Breadcrumbs -->
 
     <section >
         <div class="container">
@@ -144,20 +148,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
                 <input type="text" half placeholder="Phone number" name="numtel" autocomplete="no" required>
                 <input type="text" half placeholder="Account number" name="numcompte" autocomplete="no" required>
                 <input type="email"  half placeholder="e-Mail" name="email" autocomplete="no" required>
-                <input type="password" half placeholder="Password" name="password" autocomplete="no" required>
                 <input type="date" half placeholder="date of birth" name="date_naissance" autocomplete="no" required>
                 <input type="text" half placeholder="address" name="adress" autocomplete="no" required>
 
 
                 <select name="role">
-                    <?php
 
-                    $stmt = $db->query("SELECT * FROM role");
-                    $roles = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    foreach ($roles as $role) {
-                        echo '<option value="' . $role['id_role'] . '">' . $role['nom_role'] . '</option>';
-                    }
-                    ?>
+                    <option value='2'> user</option>
                 </select>
                 <input type="submit" value="Send it">
             </form>

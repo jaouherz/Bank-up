@@ -5,7 +5,12 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
 ob_start();
 include 'config db.php';
 include 'sidebar.php';
+$role = $_SESSION['role'];
 
+if ($role !== 'agent') {
+    header('Location: error.php');
+    exit;
+}
 if (!isset($_SESSION['id']) || empty($_SESSION['id'])) {
     header('Location: login.php');
     exit;
@@ -59,25 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($user !== false && !password_verify($password, $user['password'])) {
 
 
-        ob_end_clean();
-        echo json_encode(['error' => "The entered password is incorrect."]);
-
-        exit;
-
-    }else{
-        if ($amount > $balance + $plafond_r) {
-            ob_end_clean();
-            echo json_encode(['error' => "The entered amount is higher than your balance plus your plafond_r."]);
-            exit;
-        }else{
-
-            $stmt = $db->prepare("UPDATE bank_account SET solde = solde - :amount WHERE id_user = :id");
-            $stmt->bindParam(':id', $userid);
-            $stmt->bindParam(':amount', $amount);
-            $stmt->execute();
 
 
             $stmt = $db->prepare("UPDATE bank_account SET solde = solde + :amount WHERE id_account = :id");
@@ -87,16 +75,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-            $stmt = $db->prepare("SELECT id_account FROM bank_account WHERE id_user = :id");
-            $stmt->bindParam(':id', $userid);
-            $stmt->execute();
-            $sender_account = $stmt->fetch(PDO::FETCH_ASSOC)['id_account'];
 
 
 
 
-            $stmt = $db->prepare("INSERT INTO transaction (compte_sender, compte_receiver, montant, date) VALUES (:sender_id, :receiver_id, :amount, NOW())");
-            $stmt->bindParam(':sender_id', $sender_account);
+
+            $stmt = $db->prepare("INSERT INTO transaction (compte_sender, compte_receiver, montant, date) VALUES ('25', :receiver_id, :amount, NOW())");
             $stmt->bindParam(':receiver_id', $receiver);
             $stmt->bindParam(':amount', $amount);
             $result = $stmt->execute();
@@ -110,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(['success' => "Transaction successfully added."]);
                 exit;
             }
-        }}
+
 
 }
 ?>
@@ -121,23 +105,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="mainpage.css"></head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <style>
-        .ui-autocomplete {
-            position: absolute;
-            z-index: 1051;
-            background-color: white;
-            border: 1px solid #ccc;
-            max-height: 150px;
-            overflow-y: auto;
-            overflow-x: hidden;
-            cursor: pointer;
-        }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<style>
+    .ui-autocomplete {
+        position: absolute;
+        z-index: 1051;
+        background-color: white;
+        border: 1px solid #ccc;
+        max-height: 150px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        cursor: pointer;
+    }
 
-    </style>
+</style>
 <meta charset="UTF-8">
 <title>Make Transaction</title>
 </head>
@@ -146,33 +130,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include "sidebar.php"
     ?>
     <div class="container">
-        <div class="col-12 px-0 mb-4 ">
-            <div class="pagetitle">
-                <h1>
-                    Create your transaction
-                </h1>
-                <br>
-            </div>
-        </div>
+
         <div class="col-12 px-0 mb-4">
             <div class="container-box">
                 <div class="container-fluid d-flex">
-                    <div class="flex-grow-1">
-                        <div class="row box-right">
-                            <div class="col-md ps-0 " style="display:inline-flex;" >
-                                <h1>Your solde is :</h1>
-                                <p class="h1 fw-bold d-flex" style="color: green"> <?php
-                                    echo $bank_account['solde']
-                                    ?> <span class="  textmuted pe-1 h6 align-text-top mt-1"> DT</span> </p>
-                            </div >
 
-                        </div>
 
                         <div id="main-container" >
                             <div class="col-xl-8" style="width: auto;">
                                 <div class="card mb-4">
                                     <div class="card-header py-3" style="background-color:rgb(44, 134, 243); ">
-                                        <h6 style="color:white;font-size: 17px;margin-left: 44%;">Make a Transaction</h6>
+                                        <h6 style="color:white;font-size: 17px;margin-left: 44%;">Make a Deposit</h6>
                                     </div>
                                     <div class="card-body">
                                         <form method="POST">
@@ -185,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                     <label class="small mb-1" for="amount">Amount<span style="color: #D72A12">*</span></label>
                                                     <input class="form-control" id="amount" type="text" name="amount">
                                                 </div>
-                                                <button type="submit" class="btn btn-primary" style="text-align:center;width:250px; margin-left: 40%;margin-top:15px;">Make Transaction</button>
+                                                <button type="submit" class="btn btn-primary" style="text-align:center;width:250px; margin-left: 40%;margin-top:15px;">Make Deposit</button>
                                             </div>
                                         </form>
                                     </div>
@@ -210,23 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" style="    margin-top: 13%;">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="passwordModalLabel">Confirm Password</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <input type="password" id="passwordInput" class="form-control" placeholder="Enter your password">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary" id="confirmPasswordButton">Confirm</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
