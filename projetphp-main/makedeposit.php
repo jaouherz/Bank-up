@@ -130,38 +130,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include "sidebar.php"
     ?>
     <div class="container">
-
+        <div class="col-12 px-0 mb-4 ">
+            <div class="pagetitle">
+                <h1>
+                    Agent Panel:Money Management
+                </h1>
+                <br>
+            </div>
+        </div>
         <div class="col-12 px-0 mb-4">
             <div class="container-box">
-                <div class="container-fluid d-flex">
-
-
-                        <div id="main-container" >
-                            <div class="col-xl-8" style="width: auto;">
-                                <div class="card mb-4">
-                                    <div class="card-header py-3" style="background-color:rgb(44, 134, 243); ">
-                                        <h6 style="color:white;font-size: 17px;margin-left: 44%;">Make a Deposit</h6>
+                <div class="col-xl-8" style="width: 100%;">
+                    <div class="card mb-4">
+                        <div class="card-header py-3" style="background-color:rgb(44, 134, 243); ">
+                            <h6 style="color:white;font-size: 17px;margin-left: 44%;margin-top:1%">Make a Deposit</h6>
+                        </div>
+                        <div class="card-body">
+                            <form method="POST">
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="receiver">Receiver<span style="color: #D72A12">*</span></label>
+                                        <input class="form-control" id="receiver" type="text" name="receiver">
                                     </div>
-                                    <div class="card-body">
-                                        <form method="POST">
-                                            <div class="row gx-3 mb-3">
-                                                <div class="col-md-6">
-                                                    <label class="small mb-1" for="receiver">Receiver<span style="color: #D72A12">*</span></label>
-                                                    <input class="form-control" id="receiver" type="text" name="receiver">
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label class="small mb-1" for="amount">Amount<span style="color: #D72A12">*</span></label>
-                                                    <input class="form-control" id="amount" type="text" name="amount">
-                                                </div>
-                                                <button type="submit" class="btn btn-primary" style="text-align:center;width:250px; margin-left: 40%;margin-top:15px;">Make Deposit</button>
-                                            </div>
-                                        </form>
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="amount">Amount<span style="color: #D72A12">*</span></label>
+                                        <input class="form-control" id="amount" type="text" name="amount">
                                     </div>
+                                    <button type="submit" class="btn btn-primary" style="text-align:center;width:250px; margin-left: 40%;margin-top:15px;">Make Deposit</button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
+
                 <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
                     <div class="modal-dialog" style="    margin-top: 13%;">
                         <div class="modal-content">
