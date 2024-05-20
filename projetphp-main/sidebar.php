@@ -68,7 +68,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
 
 
                 <li class="has-subnav" >
-                    <a>
+                    <a href="requestList.php">
                         <i class=" fa fa-solid fa-comment-dots"></i>                    <span class="nav-text">
                                 My requests
                             </span>
