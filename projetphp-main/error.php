@@ -554,10 +554,9 @@
 </head>
 
 <body>
-<button class='glowing-btn' style="    margin-top: -566px"><span class='glowing-txt'>UN<span class='faulty-letter'>AUTHO</span>RISED</span></button>
 <div class='hover'>
     <div class='background'>
-        <div class='door'>VIP</div>
+        <div class='door'>403</div>
         <div class='rug'></div>
     </div>
     <div class='foreground'>

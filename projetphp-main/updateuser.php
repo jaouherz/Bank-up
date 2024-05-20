@@ -162,17 +162,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
                 <input type="text" placeholder="Phone Number" name="numtel" value="<?php echo isset($numtel) ? $numtel : ''; ?>" autocomplete="no">
                 <input type="date" half placeholder="Date of birth" name="date_naissance" value="<?php echo isset($date_naissance) ? $date_naissance : ''; ?>" autocomplete="no">
                 <input type="text" half placeholder="address" name="adress" value="<?php echo isset($adress) ? $adress : ''; ?>" autocomplete="no">
-                <input type="email" half placeholder="e-Mail" name="email" value="<?php echo isset($email) ? $email : ''; ?>" autocomplete="no">
-                <input type="password"  placeholder="Password" name="password" autocomplete="no">
-                <select  name="role" >
-                    <?php
-                    $stmt = $db->query("SELECT * FROM role");
-                    $roles = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    foreach ($roles as $role) {
-                        $selected = isset($role) && $role['id_role'] == $role ? 'selected' : '';
-                        echo '<option value="' . $role['id_role'] . '" ' . $selected . '>' . $role['nom_role'] . '</option>';
-                    }
-                    ?>
+                <input disabled type="email" half placeholder="e-Mail" name="email" value="<?php echo isset($email) ? $email : ''; ?>" autocomplete="no">
+                <select   disabled name="role" >
+                <option>user</option>
                 </select>
                 <input type="submit" value="Send it">
             </form>

@@ -5,7 +5,11 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
 ob_start();
 include 'config db.php';
 include 'sidebar.php';
-
+require 'D:\xamp\htdocs\vendor\phpmailer\phpmailer\src\Exception.php';
+require 'D:\xamp\htdocs\vendor\phpmailer\phpmailer\src\PHPMailer.php';
+require 'D:\xamp\htdocs\vendor\phpmailer\phpmailer\src\SMTP.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 if (!isset($_SESSION['id']) || empty($_SESSION['id'])) {
     header('Location: login.php');
     exit;
@@ -84,8 +88,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bindParam(':id', $receiver);
             $stmt->bindParam(':amount', $amount);
             $stmt->execute();
+            $stmt = $db->prepare("SELECT *  FROM bank_account, user  WHERE id_account = :id and id_user = User_id");
+            $stmt->bindParam(':id', $receiver);
+            $stmt->execute();
+            $user2 = $stmt->fetch(PDO::FETCH_ASSOC);
+            $mail = new PHPMailer(true);
 
+            if ($stmt) {
+                try {
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com';
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'jaouher3009@gmail.com';
+                    $mail->Password = 'degf ozkq sqvv eydt';
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                    $mail->Port = 587;
 
+                    //Recipients
+                    $mail->setFrom('your-email@example.com', 'BANK-UP');
+                    $mail->addAddress($user2['Email']);
+
+                    //Content
+                    $mail->isHTML(true);
+                    $mail->Subject = 'You have a new transaction ';
+                    $mail->Body = "new transaction of $amount DT has been made to your account";
+
+                    $mail->send();
+                    echo '<div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p>Form submission failed!</p>
+                </div>
+            </div>';
+                } catch (Exception $e) {
+                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                }
+            }
 
             $stmt = $db->prepare("SELECT id_account FROM bank_account WHERE id_user = :id");
             $stmt->bindParam(':id', $userid);

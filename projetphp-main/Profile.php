@@ -1,6 +1,60 @@
 
 <?php
-include "sidebar.php"
+if(session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+global $db;
+include 'config db.php';
+include 'sidebar.php';
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
+    // Process form submission
+    $name = $_POST['name'];
+    $lastname = $_POST['lastname'];
+    $numtel = $_POST['numtel'];
+    $email = $_POST['email'];
+    $password = $_POST['password']; // Note: It's advisable to hash the password before storing it.
+    $date_naissance = $_POST['date_naissance'];
+    $adress = $_POST['adress'];
+    $role = $_POST['role'];
+
+    // Update user information in the database
+    $stmt = $db->prepare("UPDATE user SET Firstname = :name, Lastname = :lastname, Numtel = :numtel, Email = :email, Password = :password, Date_N = :date_naissance, Adresse = :adress, id_role = :role WHERE User_id = :id");
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':lastname', $lastname);
+    $stmt->bindParam(':numtel', $numtel);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':password', $password);
+    $stmt->bindParam(':date_naissance', $date_naissance);
+    $stmt->bindParam(':adress', $adress);
+    $stmt->bindParam(':role', $role);
+    $stmt->bindParam(':id', $_SESSION['id']); // Assuming the 'id' parameter is always present in the URL
+    $stmt->execute();
+
+    header("Location: main.php");
+    exit();
+} else {
+    if (isset($_SESSION['id'])) {
+        $id = $_SESSION['id'];
+
+        $stmt = $db->prepare("SELECT * FROM user WHERE User_id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
+
+            $name = $user['Firstname'];
+            $lastname = $user['Lastname'];
+            $numtel = $user['Numtel'];
+            $email = $user['Email'];
+            $date_naissance = $user['Date_N'];
+            $adress = $user['Adresse'];
+            $role = $user['id_role'];
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +85,6 @@ include "sidebar.php"
                     <div class=" bootstrap snippets bootdey" >
 
                         <div class="row">
-                            <!-- left column -->
                             <div class="col-md-3">
                                 <div class="text-center">
                                     <img class="avatar img-circle img-thumbnail" alt="avatar" src='bank-account-icon-in-trendy-outline-style-isolated-on-white-background-bank-account-silhouette-symbol-for-your-website-design-logo-app-ui-illustration-eps10-free-vector.jpg' >
@@ -48,28 +101,25 @@ include "sidebar.php"
                                                 </div>
                                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                                     <div class="form-group">
-                                                        <label  class="small mb-1" for="nom">First Name</label>
-                                                        <input type="text" name="nom" class="form-control" id="nom">
+                                                        <label class="small mb-1" for="lastname">Last Name</label>
+                                                        <input type="text" class="form-control" name="lastname" id="lastname" value="<?php echo isset($lastname) ? $lastname : ''; ?>">
                                                     </div>
                                                 </div>
+
                                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                                     <div class="form-group">
-                                                        <label class="small mb-1" for="prenom">Last Name</label>
-                                                        <input type="prenom" type="text" class="form-control" name="prenom" id="prenom" >
+                                                        <label class="small mb-1" for="lastname">first Name</label>
+                                                        <input type="text" class="form-control" name="lastname" id="lastname" value="<?php echo isset($name) ? $name : ''; ?>">
                                                     </div>
                                                 </div>
+
                                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="email">Email</label>
-                                                        <input class="form-control" id="email" type="email" name='email'>
+                                                        <input class="form-control" id="email" type="email" name='email' value="<?php echo isset($email) ? $email : ''; ?>">
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="role">Role</label>
-                                                        <input class="form-control" id="role"  type="text" name='role' readonly>
-                                                    </div>
-                                                </div>
+
                                             </div>
 
                                             <div class="row gutters">
@@ -77,47 +127,17 @@ include "sidebar.php"
                                                     <h6 class="mt-3 mb-2 text-primary"></h6>
                                                 </div>
 
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="dateNaissance">Date of birth</label>
-                                                        <input class="form-control" id="dateNaissance"  type="date"  name='dateNaissance' >
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="adresse">Address</label>
-                                                        <input class="form-control" id="adresse"  type="text"  name='adresse'  >
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="sexe">Gender</label>
-                                                        <select name="sexe"id="sexe" class="form-control" >
-                                                            <option value="" selected>--Sexe-</option>
-                                                            <option value="Masculin">Masculin</option>
-                                                            <option value="Feminin">Feminin</option>
 
-                                                        </select>          </div>
-                                                </div>
+
 
                                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="numtel">Phone number</label>
-                                                        <input class="form-control" id="numtel"  type="number" name='numtel'  >
+                                                        <input class="form-control" id="numtel"  type="text" name='numtel' value="<?php echo isset($numtel) ? $numtel : ''; ?>" >
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="ncin">Cin</label>
-                                                        <input class="form-control" id="ncin"  type="number" name='ncin' >
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                                    <div class="form-group">
-                                                        <label class="small mb-1" for="numcompte">Account number</label>
-                                                        <input class="form-control" id="numcompte"  type="text"  name='numcompte'>
-                                                    </div>
-                                                </div>
+
+
 
 
                                                 <div class="row gutters">
